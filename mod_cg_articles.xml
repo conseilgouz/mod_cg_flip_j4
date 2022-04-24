@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+     <fieldset name="section">
+		<field name="articles_title" type="text" 
+				label="Titre" showon="collapse:1"
+		/>
+		<field name="collapse" type="sql"
+		default="0"
+		query="select enabled from #__extensions where name = 'plg_system_phocacollapse'"
+		key_field="enabled"
+		key_value="enabled"
+		class="hidden"
+		/>
+		<field name="sf_type" type="radio"  label="CG_TYPE" default="content" >
+			<option	value="text">CG_TEXT</option>
+			<option	value="category">CG_CATEGORY</option>
+			<option	value="content">CG_ARTICLE</option>
+		</field>	
+		<field showon="sf_type:text" 
+			name="text" type="editor" cols="40" rows="4" filter="safehtml" default=""
+			label="CG_TEXT"  />
+		<field showon="sf_type:category"
+			name="category" type="category" extension="com_content" 
+			label="CG_CATEGORY"/>
+		<field showon="sf_type:category"
+			name="choixdate" type="radio"  class=" btn-group"
+			label="CG_CHOIXDATE" description="CG_CHOIXDATE_DESC" default="modified">
+			<option	value="modified">CG_UPDATE</option>
+			<option	value="created">CG_CREATE</option>
+		</field>
+		<field showon="sf_type:category"
+			name="articlepage" type="number" 
+			label="CG_CAT_NBART" description="CG_CAT_NBART_DESC" default="1" min="1"/>
+		<field showon="sf_type:category[AND]articlepage!:1"
+			name="articlecol" type="number" 
+			label="CG_CAT_ARTCOL" description="CG_CAT_ARTCOL_DESC" default="1" min="1" max="4" />
+		<field showon="sf_type:category"
+			type="note" name="notevide"  />
+		<field showon="sf_type:content"
+			name="article" type="sql" default="0" label="CG_ARTICLE"
+			query="SELECT id as article_id, title as value FROM #__content where state=1"
+			key_field="article_id"	value_field="value"	/>
+	</fieldset>
+</form>

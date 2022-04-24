@@ -1,0 +1,61 @@
+<changelogs>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
+		<version>2.0.4</version>
+        <note>
+            <item>Update : 25/03/2022</item>
+        </note>
+        <fix>
+            <item>auto mode</item>
+        </fix>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
+		<version>2.0.3</version>
+        <note>
+            <item>Update : 25/03/2022</item>
+        </note>
+        <fix>
+            <item>mod_cg_articles.xml : remove switcher class</item>
+        </fix>
+		<addition>
+			<item>Phoca Collapse compatible</item>
+		</addition>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
+		<version>2.0.2</version>
+        <note>
+            <item>Update : 02/10/2021</item>
+        </note>
+        <fix>
+            <item>ModuleHelper/HTMLHelper calls</item>
+        </fix>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
+		<version>2.0.1</version>
+        <note>
+            <item>Update : 01/10/2021</item>
+        </note>
+        <fix>
+            <item>Suppress PHP 8 notice</item>
+			<item>Suppress obsolete files/directories</item>
+        </fix>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
+		<version>2.0.0</version>
+        <note>
+            <item>Update : 04/09/2021</item>
+        </note>
+        <addition>
+            <item>Joomla 4.0 compatibility</item>
+        </addition>
+	</changelog>
+</changelogs>

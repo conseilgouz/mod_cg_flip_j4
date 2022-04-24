@@ -1,0 +1,61 @@
+/**
+ * @package CG Flip Module
+ * @version 2.0.4
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ * @copyright (c) 2022 ConseilGouz. All Rights Reserved.
+ * @author ConseilGouz 
+ * 
+ *						>>>	CSS for Admin display module  <<<
+ */
+.form-horizontal .controls {
+	margin-left: 10px;
+}
+.control-group:nth-of-type(6){
+	float:left;width:50%;
+}
+.control-group:nth-of-type(7){ /* display */
+	float:right;width:50%;
+}
+.control-group:nth-of-type(8){ /* phone display */
+	float:left;width:50%;
+}
+.control-group:nth-of-type(9){ /* tyme menu */
+	float:right;width:50%;
+}
+.control-group:nth-of-type(10){ /* menu position */
+	float:none;clear:both
+}
+.control-group:nth-of-type(20){
+	float:left;width:50%;
+}
+.control-group:nth-of-type(21){
+	float:left;width:50%;
+}
+.controls textarea {width:70%}
+
+.info-labels + div {
+background: none repeat scroll 0 0 #EEEEEE;
+color: #000000;
+font-size: 110%;
+font-style: italic;
+font-weight: normal;
+margin: 15px 0 30px;
+padding: 15px 10px 10px 20px;
+}
+.subform-repeatable-group .control-group:nth-of-type(3){
+	display:none;
+}
+.subform-repeatable-group .control-group:nth-of-type(7){
+	float:none;clear:both;width:100%;
+}
+.subform-repeatable-group .control-group:nth-of-type(8){
+	float:left;width:50%;
+}
+.subform-repeatable-group .control-group:nth-of-type(9){
+	float:right;width:50%;
+}
+.subform-repeatable-group .control-group:nth-of-type(10){
+	float:none;clear:both;width:100%;
+}
+
+

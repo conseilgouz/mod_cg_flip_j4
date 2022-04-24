@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<extension version="4.0" type="module" method="upgrade" client="site">
+	<name>CG Flip</name>
+	<author>ConseilGouz</author>
+	<creationDate>September 2021</creationDate>
+	<copyright>Copyright (C) 2022 ConseilGouz. All rights reserved</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2</license>
+	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
+	<authorUrl>www.conseilgouz.com</authorUrl>
+	<version>2.0.4</version>
+	<description>CG_XML_DESCRIPTION</description>
+	<namespace path="src">ConseilGouz\Module\CGFlip</namespace>
+	<scriptfile>script.php</scriptfile>
+	<files>
+		<filename module="mod_cg_flip">mod_cg_flip.php</filename>
+		<filename>index.html</filename>
+		<filename>mod_cg_flip.xml</filename>
+		<filename>mod_cg_imgs.xml</filename>
+		<filename>mod_cg_articles.xml</filename>
+		<folder>tmpl</folder>
+		<folder>src</folder>
+	</files>
+	<media destination="mod_cg_flip" folder="media">
+		<folder>js</folder>
+		<folder>css</folder>
+		<folder>fonts</folder>
+		<folder>images</folder>
+		<filename>index.html</filename>
+	</media>
+	<languages>
+		<language tag="en-GB">language/en-GB/mod_cg_flip.ini</language>
+		<language tag="eb-GB">language/en-GB/mod_cg_flip.sys.ini</language>
+		<language tag="fr-FR">language/fr-FR/mod_cg_flip.ini</language>
+		<language tag="fr-FR">language/fr-FR/mod_cg_flip.sys.ini</language>
+	</languages>
+
+	<config>
+		<fields name="params" >
+			<fieldset name="basic"
+				addruleprefix="ConseilGouz\Module\CGFlip\Site\Rule">>
+				<field name="ratiotype" type="radio" label="CG_RATIO_TYPE" description="CG_RATIO_TYPE_DESC" 
+					class="btn-group" default="0">
+                    <option value="0">CG_STANDARD</option>
+					<option value="1">CG_PERSO</option>
+                </field>
+				<field showon="ratiotype:0" 
+				name="ratio" type="list" default="1.41" label="CG_RATIO" description="CG_RATIO_DESC" >
+				<option value="1.41">CG_A4</option>
+				<option value="1.29">CG_LETTER</option>
+				<option value="1.44">CG_EXECUTIVE</option>
+				<option value="1.64">CG_LEGAL</option>
+				</field>
+				<field showon="ratiotype:1"
+				name="ratio_perso" type="text" default="1.0"	class="validate-numeric"
+				label="CG_RATIO_PERSO" description="CG_RATIO_PERSO_DESC"
+				/>
+
+				<field name="init" type="radio" label="CG_INIT" description="CG_INIT_DESC" 
+					class="btn-group" default="double"
+				>
+                    <option value="single">CG_SINGLE</option>
+					<option value="double">CG_DOUBLE</option>
+                </field>
+				<field name="init_phone" type="radio" label="CG_INIT_PHONE" description="CG_INIT_PHONE_DESC" 
+					class="btn-group" default="single"
+				>
+                    <option value="single">CG_SINGLE</option>
+					<option value="double">CG_DOUBLE</option>
+                </field>
+				<field name="typemenu" type="radio" label="CG_TYPEMENU" description="CG_TYPEMENU_DESC" class="btn-group" default="full">
+                    <option value="full">CG_FULL</option>
+					<option value="mini">CG_MINI</option>
+					<option value="aucun">CG_NONE</option>			  
+                </field>
+				<field showon="typemenu:full,mini" name="menu" type="radio" label="CG_POSITION" description="CG_POSITION_DESC" class="btn-group" default="bas">
+                    <option value="haut">CG_TOP</option>
+					<option value="bas">CG_BOTTOM</option>
+					<option value="aucun">CG_NONE</option>			  
+                </field>
+				<field name="css_gen" type="textarea" label="CG_CSS_GEN" description="CG_CSS_GEN_DESC" cols="200" rows="4" filter="raw" 
+					default=".cg_flip_main{} .cg_page_event{} .cg_un_event{}"			
+				/>	
+				<field name="auto" type="radio" label="CG_AUTO" description="CG_AUTO_DESC" 
+					class="btn-group" default="false">
+                    <option value="true">JYES</option>
+					<option value="false">JNO</option>
+                </field>
+				<field showon="auto:true"
+				name="auto_delay" type="text" default="3000"	class="validate-numeric"
+				label="CG_AUTO_DELAY" description="CG_AUTO_DELAY_DESC"
+				/>
+				<field name="cg_type" type="radio" label="CG_TYPE" description="CG_TYPE_DESC"
+					class="btn-group" default="dir">
+					<option value="dir">CG_ONE_DIR</option>
+					<option value="files">CG_FILES</option>
+					<option value="articles">CG_ARTICLES</option>
+					<option value="events">CG_EVENTS</option>
+				</field>
+				<field showon="cg_type:dir" name="dir" type="folderlist" default="" label="CG_DIR" description="CG_DIR_DESC" 
+					directory="images" filter="" exclude="" stripext="" />		
+				<field	showon="cg_type:files" name="slideslist" type="subform" multiple="true" label="CG_SLIDE_LIST"
+					validate="thumbnail" default=""	formsource="/modules/mod_cg_flip/mod_cg_imgs.xml"
+				/>
+				<field showon="cg_type:dir,files" name="optimize" type="radio" label="CG_OPTIMIZE" description="CG_OPTIMIZE_DESC" 
+					class="btn-group" default="0"
+				validate="thumbnail"
+				>
+                    <option value="0">JNO</option>
+					<option value="1">JYES</option>
+                </field>
+				<field 
+					showon="cg_type:dir,files[AND]optimize:1"
+					name="compression" type="number" 
+					default="15" min="10" max="70" step="5"
+					label="CG_TAUX"	description="CG_TAUX_DESC"
+				/>
+				<field  showon="cg_type:dir,files[AND]optimize:1"
+					name="recreate" type="radio" 
+					label="CG_RECREATE" description="CG_RECREATE_DESC" 
+					class="btn-group" default="0">
+                    <option value="0">JNO</option>
+					<option value="1">JYES</option>
+                </field>
+				<field showon="cg_type:articles"
+					type="note" name="note1" label="CG_NOTE1" heading="p" />
+				<field showon="cg_type:articles"
+					name="perso" type="textarea" label="CG_PERSO" description="CG_PERSO_DESC" cols="40" rows="4" filter="raw" 
+					default="{title}&lt;br&gt;{date} - {cat} - {visit} visites&lt;br&gt;{intro}"
+					/>			
+   				<field showon="cg_type:articles"
+				name="readmore" type="radio" class="btn-group btn-group-yesno"
+				default="false" label="CG_READMORE" description="CG_READMORE_DESC"
+				>
+				<option value="true">JYES</option>
+				<option value="false">JNO</option>
+				</field>
+				<field	showon="cg_type:articles" name="articlesist" type="subform" multiple="true" label="CG_ARTICLES_LIST"
+					default=""	formsource="/modules/mod_cg_flip/mod_cg_articles.xml"
+				/>
+				<field	showon="cg_type:events" name="events_ext" type="radio"
+					label="CG_EVENTS_EXT" description="CG_EVENTS_EXT_DESC" 
+					class="btn-group" default="JEvents">
+                    <option value="JEvents">JEvents</option>
+					<option value="DPCalendar">DPCalendar</option>
+					
+                </field>
+				<field	showon="cg_type:events" name="nb_events" type="number"
+				default="5" min="1" max="100" step="1"
+				label="CG_NB_EVENTS" description="CG_NB_EVENTS_DESC"
+				/>
+   				<field showon="cg_type:events"
+				name="emptyhide" type="radio" class="btn-group btn-group-yesno"
+				default="false" label="CG_HIDE_EMPTY" description="CG_HIDE_EMPTY_DESC"
+				>
+				<option value="true">JYES</option>
+				<option value="false">JNO</option>
+				</field>
+	  			<field  showon="cg_type:events" 
+				name="event_bg" type="color" default="#fafa00" label="CG_EVENT_BG" description="CG_EVENT_BG_DESC"
+				/>
+				<field	showon="cg_type:events[AND]events_ext:JEvents" name="cat_events" 
+					type="category" extension="com_jevents" 
+					label="CG_CATEGORY" description="CG_CATEGORY_DESC"
+				/>
+				<field showon="cg_type:events[AND]events_ext:JEvents" name="menupath" type = "sql"
+				label="CG_MENU_JEVENTS" description="CG_MENU_JEVENTS_DESC"
+				query="SELECT path as value, title from #__menu where link like '%index.php?option=com_jevents%' AND link like '%view%'"
+				key_field="value"
+				value_field="title"
+				/>	
+				<field	showon="cg_type:events[AND]events_ext:DPCalendar" name="cat_events_dp" 
+					type="category" extension="com_dpcalendar" 
+					label="CG_CATEGORY" description="CG_CATEGORY_DESC"
+				/>
+				<field showon="cg_type:events[AND]events_ext:DPCalendar" name="menupathdp" type = "sql"
+				label="CG_MENU_DPCALENDAR"
+				description="CG_MENU_DPCALENDAR_DESC"
+				query="SELECT path as value, title from #__menu where link like '%index.php?option=com_dpcalendar%' AND link like '%view%'"
+				key_field="value"
+				value_field="title"
+				/>
+
+				<field showon="cg_type:events" name="typeaff" type="radio" class="btn-group"
+				   		default="title" label="CG_EVENTS_TYPAFF" description="CG_EVENTS_TYPAFF_DESC">
+   					<option value="title">CG_EVENTS_TITLE</option>
+					<option value="desc">CG_EVENTS_DESC</option>
+				</field>
+   				<field showon="cg_type:events"
+				name="readmore_evt" type="radio" class="btn-group btn-group-yesno"
+				default="false" label="CG_READMORE" description="CG_READMORE_DESC"
+				>
+				<option value="true">JYES</option>
+				<option value="false">JNO</option>
+				</field>
+   				<field showon="cg_type:events"
+				name="liblink_evt" type="radio" class="btn-group btn-group-yesno"
+				default="false" label="CG_LIBLINK" description="CG_LIBLINK_DESC"
+				>
+				<option value="true">JYES</option>
+				<option value="false">JNO</option>
+				</field>
+				
+			</fieldset>
+		</fields>
+		
+	</config>
+	<changelogurl>https://www.conseilgouz.com/updates/mod_cg_flip_changelog.xml</changelogurl>
+	
+	<updateservers>
+	<server type="extension" name="CG Flip" priority="1">https://www.conseilgouz.com/updates/mod_cg_flip_update.xml
+	</server>
+	</updateservers>
+	
+</extension>

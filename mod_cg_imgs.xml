@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+     <fieldset name="section1">
+		<field name="file_name" type="media" default="" label="FILE_NAME" description="FILE_NAME_DESC" preview="tooltip" preview_width="50" preview_height="50">
+		</field>
+		<field name="file_desc" type="text" default="" label="FILE_DESC" description="FILE_DESC_DESC" size="200">
+		</field>
+	</fieldset>
+</form>
