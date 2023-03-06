@@ -1,7 +1,7 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.0.6 
+ * @version 2.0.7 
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -20,8 +20,8 @@ $wa = Factory::getDocument()->getWebAssetManager();
 
 $wa->registerAndUseStyle('cgflip',$modulefield.'/css/cgflip.min.css'); 
 $wa->registerAndUseStyle('up',$modulefield.'/css/up.css'); 
-$wa->registerAndUseStyle('turn',$modulefield.'/js/turn.min.js');
-$wa->registerAndUseStyle('magazine',$modulefield.'/js/magazine.min.js');
+$wa->registerAndUseScript('turn',$modulefield.'/js/turn.min.js');
+$wa->registerAndUseScript('magazine',$modulefield.'/js/magazine.min.js');
 if ((bool)Factory::getConfig()->get('debug')) { // Mode debug
 	$document->addScript(''.JURI::base(true).'/media/mod_cg_flip/js/cg_flip.js'); 
 } else {
@@ -40,7 +40,7 @@ $font = '@font-face {
   font-style: normal;
 }';
 
-$wa->addInlineStyle(addStyleDeclaration($font));
+$wa->addInlineStyle($font);
 
 if ($params->get('css_gen','')) $wa->addInlineStyle($params->get('css_gen','')); // custom module css
 
