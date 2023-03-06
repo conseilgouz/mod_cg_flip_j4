@@ -1,37 +1,32 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.0.4
+ * @version 2.0.1
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
- * @copyright (c) 2022 ConseilGouz. All Rights Reserved.
+ * @copyright (c) 2021 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
  */
  namespace ConseilGouz\Module\CGFlip\Site\Helper;
 defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Access\Access;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\Uri\Uri;
-use Joomla\CMS\Plugin\PluginHelper;
-use Joomla\CMS\Component\ComponentHelper;
-use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\Component\Content\Site\Model\ArticlesModel; 
-use Joomla\Component\Content\Site\Helper\RouteHelper; 
 
-class CGFlipHelper
+class CGHelper
 {
 	private $titles = array();
+	private $hasToC = array();
 	private static $toc;
 	
     static function getFlipArticles($params,$moduleid)
 	{   // apply contents plugins
 	    PluginHelper::importPlugin('content');
 		$access = ComponentHelper::getParams('com_content')->get('show_noauth');
-		$user = Factory::getUser();
-		$authorised = Access::getAuthorisedViewLevels($user->id);
+		$authorised = Access::getAuthorisedViewLevels(Factory::getUser()->get('id'));
 		$result = array();	
-		$hasToC = array();
 		$ix = 1;
 		$sectionsList = $params->get('articlesist');
 		foreach ($sectionsList as $item) {
@@ -52,13 +47,13 @@ class CGFlipHelper
 					$show_date_field  = isset($item->choixdate) ? $item->choixdate : 'modified';
 					$show_date_format = 'Y-m-d H:i:s';
 					$article->displayDate = '';
-					$article->displayDate = HTMLHelper::_('date', $article->$show_date_field, $show_date_format);
+					$article->displayDate = JHtml::_('date', $article->$show_date_field, $show_date_format);
 					$article->slug    = $article->id . ':' . $article->alias;
 					$article->catslug = $article->catid . ':' . $article->category_alias;
 					if ($access || in_array($article->access, $authorised)) {
-						$article->link = Route::_(RouteHelper::getArticleRoute($article->slug, $article->catid, $article->language));
+						$article->link = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid, $article->language));
 					} else {
-						$article->link = Route::_('index.php?option=com_users&view=login');
+						$article->link = JRoute::_('index.php?option=com_users&view=login');
 					}
 					if ($multi && ($col == 0))	$titles[] = $article->title;
 					elseif (!$multi) $titles[] = $article->title;
@@ -84,7 +79,7 @@ class CGFlipHelper
 			} else { // free text
 				$article = $item->text;
 				// apply contents plugins
-				$item_tmp = new \stdClass;
+				$item_tmp = new stdClass;
 				$item_tmp->text = $article;
 				$item_tmp->params = $params;
 				Factory::getApplication()->triggerEvent('onContentPrepare', array ('com_content.article', &$item_tmp, &$item_tmp->params, 0));
@@ -119,7 +114,7 @@ class CGFlipHelper
 		$model     = JModelLegacy::getInstance('Article', 'ContentModel', array('ignore_request' => true));
         if ($model) {
 		// Set application parameters in model
-		$app       = Factory::getApplication();
+		$app       = JFactory::getApplication();
 		$appParams = $app->getParams();
 		$model->setState('params', $appParams);
 
@@ -130,8 +125,8 @@ class CGFlipHelper
 		$model->setState('filter.featured', $params->get('show_front', 1) == 1 ? 'show' : 'hide');
 
 		// Access filter
-		$access = JComponentHelper::getParams('com_content')->get('show_noauth');
-		$authorised = Access::getAuthorisedViewLevels(Factory::getUser()->get('id'));
+		$access = !JComponentHelper::getParams('com_content')->get('show_noauth');
+		$authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
 		$model->setState('filter.access', $access);
 
 		// Category filter
@@ -160,18 +155,18 @@ class CGFlipHelper
 		$show_date_format = 'Y-m-d H:i:s';
 		
 		$item->displayDate = '';
-		$item->displayDate = HTMLHelper::_('date', $item->$show_date_field, $show_date_format);
+		$item->displayDate = JHtml::_('date', $item->$show_date_field, $show_date_format);
 
 		$item->slug    = $item->id . ':' . $item->alias;
 		$item->catslug = $item->catid . ':' . $item->category_alias;
 		if ($access || in_array($item->access, $authorised))
 		{
 			// We know that user has the privilege to view the article
-			$item->link = Route::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language));
+			$item->link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language));
 		}
 		else
 		{
-			$item->link = Route::_('index.php?option=com_users&view=login');
+			$item->link = JRoute::_('index.php?option=com_users&view=login');
 		}
 		$arr = $item;
         }
@@ -183,10 +178,10 @@ class CGFlipHelper
 	
 	static function getCategory($id,$params,$ordering) {
 		// Get an instance of the generic articles model
-		$articles     = new ArticlesModel(array('ignore_request' => true));
+		$articles = JModelLegacy::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
 		if ($articles) {
 		// Set application parameters in model
-		$app       = Factory::getApplication();
+		$app       = JFactory::getApplication();
 		$appParams = $app->getParams();
 		$articles->setState('params', $appParams);
 
@@ -195,8 +190,8 @@ class CGFlipHelper
 		$articles->setState('list.limit', 0);
 		$articles->setState('filter.published', 1);
 		// Access filter
-		$access     = ComponentHelper::getParams('com_content')->get('show_noauth');
-		$authorised = Access::getAuthorisedViewLevels(Factory::getUser()->get('id'));
+		$access     = !JComponentHelper::getParams('com_content')->get('show_noauth');
+		$authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
 		$articles->setState('filter.access', $access);
 		$catids = $id;
 		$articles->setState('filter.category_id', $catids);		
@@ -219,17 +214,17 @@ class CGFlipHelper
 	    $libcreated=Text::_('CG_LIBCREATED'); 
 		$libupdated=Text::_('CG_LIBUPDATED');
 		$libdateformat  =Text::_('CG_DATEFORMAT');
-	    $modulefield = ''.URI::base(true).'/modules/mod_cg_flip';
+	    $modulefield = ''.JURI::base(true).'/modules/mod_cg_flip';
 		$perso = (array)$params->get('perso');
 	    // intro text 
-		$intro_tmp = new \stdClass;
+		$intro_tmp = new stdClass;
 		$intro_tmp->text = $article->introtext;
 		$intro_tmp->params = $params;
 		Factory::getApplication()->triggerEvent('onContentPrepare', array ('com_content.article', &$intro_tmp, &$intro_tmp->params, 0));
-		$text_tmp = new \stdClass;
+		$text_tmp = new stdClass;
 		$text_tmp->text ="";
 		if (in_array('{text}',$perso)) { // full text requis
-			$text_tmp = new \stdClass;
+			$text_tmp = new stdClass;
 			if (strlen($article->fulltext) == 0) {
 				$text_tmp = $intro_tmp;
 			}else {
@@ -249,7 +244,7 @@ class CGFlipHelper
 		$libdate = $choixdate == "modified" ? $libupdated : $libcreated;
 		$perso = $params->get('perso');
 		$perso = self::checkNullFields($perso,$article,$phocacount); // suppress null field if required
-		$arr_css= array("{title}"=>$title, "{cat}"=>$article->category_title,"{date}"=>$libdate.HTMLHelper::_('date', $article->displayDate, $libdateformat), "{visit}" =>$article->hits, "{intro}" => $intro_tmp->text,"{text}" => $text_tmp->text,"{stars}"=>$rating,"{rating}"=>$article->rating,"{ratingcnt}"=>$article->rating_count,"{count}"=>$phocacount);
+		$arr_css= array("{title}"=>$title, "{cat}"=>$article->category_title,"{date}"=>$libdate.JHtml::_('date', $article->displayDate, $libdateformat), "{visit}" =>$article->hits, "{intro}" => $intro_tmp->text,"{text}" => $text_tmp->text,"{stars}"=>$rating,"{rating}"=>$article->rating,"{ratingcnt}"=>$article->rating_count,"{count}"=>$phocacount);
 		foreach ($arr_css as $key_c => $val_c) {
 			$perso = str_replace($key_c,$val_c,$perso);
 		}
@@ -331,18 +326,18 @@ class CGFlipHelper
 		return $res;	
 	}
 	static function getJEvent($params,$cat,$limit) {
-		$db = Factory::getDbo();
+		$db = JFactory::getDbo();
 		$db->setQuery("SELECT enabled FROM #__extensions WHERE element = 'com_jevents'");
 		$is_enabled = $db->loadResult();        
 		if ($is_enabled != 1) { 
 			$res[] = '<div class="cg_flip_article"><div class="cg_page_event" style="background-color:'.$params->get('event_bg','lightblue').'"><div class="cg_un_event">'.Text::_('CG_INSTALL_JEVENTS').'</div></div></div>';
 			return $res;
 		} 
-	    $lang= Factory::getLanguage();
+	    $lang= JFactory::getLanguage();
 	    $locale = $lang->getLocale();
 		setlocale(LC_TIME, $locale[0],$locale[5]);
         $res = array();
-		$db = Factory::getDbo();
+		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);	
 		$query->select("GROUP_CONCAT(vrepet.rp_id) as id,GROUP_CONCAT(vrepet.startrepeat) as dtstart, GROUP_CONCAT(vrepet.endrepeat) as dtend,detail.description, detail.summary")
 		->from("#__jevents_vevdetail detail ")
@@ -407,18 +402,18 @@ class CGFlipHelper
 		return $res;
 	}
 	static function getDPCalendar($params,$cat,$limit) {
-		$db = Factory::getDbo();
+		$db = JFactory::getDbo();
 		$db->setQuery("SELECT enabled FROM #__extensions WHERE name = 'DPCalendar'");
 		$is_enabled = $db->loadResult();        
 		if ($is_enabled != 1) { 
 			$res[] = '<div class="cg_flip_article"><div class="cg_page_event" style="background-color:'.$params->get('event_bg','lightblue').'"><div class="cg_un_event">'.Text::_('CG_INSTALL_DPCALENDAR').'</div></div></div>';
 			return $res;
 		} 
-	    $lang= Factory::getLanguage();
+	    $lang= JFactory::getLanguage();
 	    $locale = $lang->getLocale();
 	    setlocale(LC_TIME, $locale[0],$locale[5]);
 	    $res = array();
-		$db = Factory::getDbo();
+		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);	
 		$query->select("detail.id,detail.start_date, detail.end_date,detail.title, detail.description, detail.all_day")
 		->from("#__dpcalendar_events detail ")
@@ -536,10 +531,10 @@ class CGFlipHelper
 	}
 //------------------------------------------------ AJAX Request --------------------------------------	
 	public static function getAjax() {
-        $input = Factory::getApplication()->input;
+        $input = JFactory::getApplication()->input;
 		$id = $input->get('id');
 		$module = self::getModuleById($id);
-		$params = new Registry($module->params);  		
+		$params = new JRegistry($module->params);  		
         $output = '';
 		if ($input->get('data') == "param") {
 			return self::getParams($id,$params);
@@ -548,7 +543,7 @@ class CGFlipHelper
 	}
 // Get Module per ID
 	private static function getModuleById($id) {
-		$db = Factory::getDbo();
+		$db = JFactory::getDbo();
 		$query = $db->getQuery(true)
 			->select('m.id, m.title, m.module, m.position, m.content, m.showtitle, m.params')
 			->from('#__modules AS m')
@@ -602,7 +597,7 @@ class CGFlipHelper
 		} else {
 			$files_java = '""';
 		}
-		$ret = '{"id" :"'.$id.'","base":"'.URI::base(true).'","type":"'.$type.'","ratio":"'.$ratio.'"';
+		$ret = '{"id" :"'.$id.'","base":"'.JURI::base(true).'","type":"'.$type.'","ratio":"'.$ratio.'"';
 		$ret .= ',"speffect":"'.$params->get('sp-effect','fadeIn').'","nbpages":"'.$nbpages.'","onepage":"'.Text::_('CG_UNE_PAGE').'"';
 		$ret .= ',"twopages":"'.Text::_('CG_DEUX_PAGE').'","init":"'.$params->get('init','double').'"';
 		$ret .= ',"init_phone":"'.$params->get('init_phone','single').'","files":'.$files_java.'}';

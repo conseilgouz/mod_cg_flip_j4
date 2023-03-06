@@ -1,9 +1,9 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.0.4 
+ * @version 2.0.5 
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
- * @copyright (c) 2022 ConseilGouz. All Rights Reserved.
+ * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
  */
 defined('_JEXEC') or die;
@@ -46,13 +46,16 @@ $toc = "";
 if ($type == "dir") {
 	$dir =  $params->get('dir', '');
 	if ($optimize == '1') $dir .= '/th';
-	$files = glob('images/'.$dir.'/*.jpg'); 
+	$files = glob('{images/'.$dir.'/*.jpg,images/'.$dir.'/*.png}',GLOB_BRACE); 
 	$nbpages = count($files);
 } elseif ($type == "files") {
 	$fileslist = $params->get('slideslist');
 	$files = array();
 	foreach ($fileslist as $file) {
 		$imgname = $file->file_name;
+	    if ($pos = strpos($imgname,"#")) {
+		    $imgname = substr($imgname,0, $pos);
+	    }
 		if ($optimize == '1')  {
 			$imgthumb = $imgname;
 			$pos = strrpos($imgthumb,'/');

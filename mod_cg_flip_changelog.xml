@@ -2,6 +2,22 @@
 	<changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
+		<version>2.0.5</version>
+        <note>
+            <item>Update : 06/03/2023</item>
+        </note>
+        <fix>
+            <item>handle PNG images in dir</item>
+            <item>single images section error</item>
+            <item>rewrite image compression function</item>
+        </fix>
+        <addition>
+            <item>look for updates/changelog files on github</item>
+        </addition>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
 		<version>2.0.4</version>
         <note>
             <item>Update : 25/03/2022</item>
