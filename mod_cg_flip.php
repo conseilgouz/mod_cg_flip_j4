@@ -1,27 +1,32 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.0.5 
+ * @version 2.0.6 
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
  */
 defined('_JEXEC') or die;
+use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Helper\ModuleHelper;
 use ConseilGouz\Module\CGFlip\Site\Helper\CGFlipHelper;
 
-$document 		= JFactory::getDocument();
-$modulefield	= ''.JURI::base(true).'/media/'.$module->module;
+$document 		= Factory::getDocument();
+$modulefield	= '/media/'.$module->module;
 
 HTMLHelper::_('jquery.framework',true);
+$wa = Factory::getDocument()->getWebAssetManager();
 
-$document->addStyleSheet($modulefield.'/css/cgflip.min.css'); 
-$document->addStyleSheet($modulefield.'/css/up.css'); 
-$document->addScript($modulefield.'/js/turn.min.js');
-$document->addScript($modulefield.'/js/magazine.min.js');
-
-$document->addScript($modulefield.'/js/cg_flip.min.js');
+$wa->registerAndUseStyle('cgflip',$modulefield.'/css/cgflip.min.css'); 
+$wa->registerAndUseStyle('up',$modulefield.'/css/up.css'); 
+$wa->registerAndUseStyle('turn',$modulefield.'/js/turn.min.js');
+$wa->registerAndUseStyle('magazine',$modulefield.'/js/magazine.min.js');
+if ((bool)Factory::getConfig()->get('debug')) { // Mode debug
+	$document->addScript(''.JURI::base(true).'/media/mod_cg_flip/js/cg_flip.js'); 
+} else {
+	$wa->registerAndUseScript('cgflip',$modulefield.'js/cg_flip.min.js');
+}
 
 $font = '@font-face {
   font-family: "cgflip";
@@ -35,9 +40,9 @@ $font = '@font-face {
   font-style: normal;
 }';
 
-$document->addStyleDeclaration($font);
+$wa->addInlineStyle(addStyleDeclaration($font));
 
-$document->addStyleDeclaration($params->get('css_gen','')); // custom module css
+if ($params->get('css_gen','')) $wa->addInlineStyle($params->get('css_gen','')); // custom module css
 
 $files = array();
 $type = $params->get('cg_type', 'dir');
