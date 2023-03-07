@@ -51,7 +51,7 @@ $toc = "";
 if ($type == "dir") {
 	$dir =  $params->get('dir', '');
 	if ($optimize == '1') $dir .= '/th';
-	$files = glob('{images/'.$dir.'/*.jpg,images/'.$dir.'/*.png}',GLOB_BRACE); 
+	$files = glob('images/'.$dir.'/*.{jpg,png}',GLOB_BRACE); 
 	$nbpages = count($files);
 } elseif ($type == "files") {
 	$fileslist = $params->get('slideslist');

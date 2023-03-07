@@ -24,29 +24,20 @@ class ThumbnailRule extends FormRule
 	    $type = $params->cg_type;
 	    $compression = $params->compression;
 	    $recreate = $params->recreate;
-	    if ($type == "dir") {
-	        if ($params->optimize == '1') {
-	            if ($recreate == '1') {
-	                $_dir = JPATH_ROOT.'/images/'.$params->dir.'/th';
-	                if (Folder::exists($_dir))
-	                   Folder::delete($_dir); // supprime avant creation
-	            }
+        if ($params->optimize == '1') {
+            $_dir = JPATH_ROOT.'/images/'.$params->dir.'/th';
+            if ($recreate == '1') {
+                if (Folder::exists($_dir))
+                   Folder::delete($_dir); // supprime avant creation
+            }
+            self::create_subdir($_dir);
+			if ($type == "dir") {
 	            self::thumbnailFromDir($params,$compression);
-	        }
-	    } else {
-	        self::thumbnailFromSingleImages($value,$params,$compression);
-	    }
-	    return true;
-	}
-	function checkparameter($dir) {
-		$pattern = array('/\$catid/','/\$catalias/', '/\$articleid/', '/\$articlealias/');
-		$replace = array('catid', 'articleid');
-		$root = preg_replace($pattern, $replace, $dir);
-		if (($pos = strpos($root,'$')) !== false) {
-			Factory::getApplication()->enqueueMessage('r&eacute;pertoire <strong>'.$dir.'</strong> incorrect: zone '.substr($root,$pos).' inconnue','error');
-			return false;
+			} else {
+				self::thumbnailFromSingleImages($value,$params,$compression);
+			}
 		}
-		return true;
+	    return true;
 	}
 	function thumbnailFromDir($params,$compression) {
 	    $files = Folder::files(JPATH_ROOT.'/images/'.$params->dir,null,null ,null ,array() , array('desc.txt','index.html','.htaccess'));
@@ -59,7 +50,7 @@ class ThumbnailRule extends FormRule
 				$len = strlen($imgthumb);
 				$imgthumb = $_dir.'/th/'.substr($imgthumb,$pos,$len);
 				if (!File::exists('../'.$imgthumb)) { // fichier existe déjà  : on sort
-					self::createThumbNail(URI::root().$_dir.'/'.$file,$imgthumb,$compression);
+				    self::createThumbNail(URI::root().$_dir.'/'.$file,JPATH_ROOT.'/'.$imgthumb,$compression);
 					$nb = $nb+1;
 				}
 			} 
@@ -137,5 +128,13 @@ class ThumbnailRule extends FormRule
         }
 		return true;
     }
-
+    function create_subdir($dir)
+    {
+        if (! is_dir( $dir)) {
+            if (! @mkdir( $dir, 0755, true)) {
+                throw new \RuntimeException('There was a file permissions problem in folder \'' . $dir . '\'');
+            }
+        }
+        return true;
+    }
 }

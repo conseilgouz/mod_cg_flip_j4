@@ -2,6 +2,19 @@
 	<changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
+		<version>2.0.8</version>
+        <note>
+            <item>Update : 07/03/2023</item>
+        </note>
+        <fix>
+            <item>recreate th directory if absent</item>
+            <item>remove pics directory</item>
+            <item>handle PNG images in dir</item>
+        </fix>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
 		<version>2.0.7</version>
         <note>
             <item>Update : 06/03/2023</item>

@@ -37,7 +37,7 @@
 	<config>
 		<fields name="params" >
 			<fieldset name="basic"
-				addruleprefix="ConseilGouz\Module\CGFlip\Site\Rule">>
+				addruleprefix="ConseilGouz\Module\CGFlip\Site\Rule">
 				<field name="ratiotype" type="radio" label="CG_RATIO_TYPE" description="CG_RATIO_TYPE_DESC" 
 					class="btn-group" default="0">
                     <option value="0">CG_STANDARD</option>
@@ -102,9 +102,7 @@
 					validate="thumbnail" default=""	formsource="/modules/mod_cg_flip/mod_cg_imgs.xml"
 				/>
 				<field showon="cg_type:dir,files" name="optimize" type="radio" label="CG_OPTIMIZE" description="CG_OPTIMIZE_DESC" 
-					class="btn-group" default="0"
-				validate="thumbnail"
-				>
+					class="btn-group" default="0">
                     <option value="0">JNO</option>
 					<option value="1">JYES</option>
                 </field>

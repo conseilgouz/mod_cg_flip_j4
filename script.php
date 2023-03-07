@@ -1,9 +1,9 @@
 <?php
 /**
-* CG Flip Module  - Joomla 4.0.0 Module 
-* Version			: 2.0.4
+* CG Flip Module  - Joomla 4.x Module 
+* Version			: 2.0.8
 * Package			: CG Flip
-* copyright 		: Copyright (C) 2022 ConseilGouz. All rights reserved.
+* copyright 		: Copyright (C) 2023 ConseilGouz. All rights reserved.
 * license    		: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
 */
 // No direct access to this file
@@ -16,8 +16,8 @@ use Joomla\CMS\Filesystem\File;
 
 class mod_cg_flipInstallerScript
 {
-	private $min_joomla_version      = '3.9.0';
-	private $min_php_version         = '7.2';
+	private $min_joomla_version      = '4.0.0';
+	private $min_php_version         = '7.4';
 	private $name                    = 'CG Flip';
 	private $exttype                 = 'module';
 	private $extname                 = 'cg_flip';
@@ -68,7 +68,7 @@ class mod_cg_flipInstallerScript
 		return true;
     }
 	private function postinstall_cleanup() {
-		$obsloteFolders = ['css', 'fonts', 'images','js','language','models'];
+		$obsloteFolders = ['css', 'fonts', 'images','js','language','models','pics'];
 		// Remove plugins' files which load outside of the component. If any is not fully updated your site won't crash.
 		foreach ($obsloteFolders as $folder)
 		{
