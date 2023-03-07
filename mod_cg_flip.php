@@ -1,7 +1,7 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.0.7 
+ * @version 2.1.0 
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -13,7 +13,7 @@ use Joomla\CMS\Helper\ModuleHelper;
 use ConseilGouz\Module\CGFlip\Site\Helper\CGFlipHelper;
 
 $document 		= Factory::getDocument();
-$modulefield	= '/media/'.$module->module;
+$modulefield	= 'media/'.$module->module;
 
 HTMLHelper::_('jquery.framework',true);
 $wa = Factory::getDocument()->getWebAssetManager();
@@ -25,7 +25,7 @@ $wa->registerAndUseScript('magazine',$modulefield.'/js/magazine.min.js');
 if ((bool)Factory::getConfig()->get('debug')) { // Mode debug
 	$document->addScript(''.JURI::base(true).'/media/mod_cg_flip/js/cg_flip.js'); 
 } else {
-	$wa->registerAndUseScript('cgflip',$modulefield.'js/cg_flip.min.js');
+	$wa->registerAndUseScript('cgflip',$modulefield.'/js/cg_flip.min.js');
 }
 
 $font = '@font-face {
