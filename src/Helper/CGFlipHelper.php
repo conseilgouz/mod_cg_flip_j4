@@ -1,7 +1,7 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.0.8
+ * @version 2.1.1
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -17,6 +17,7 @@ use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\Component\Content\Site\Model\ArticlesModel; 
+use Joomla\Component\Content\Site\Model\ArticleModel; 
 use Joomla\Component\Content\Site\Helper\RouteHelper; 
 
 class CGFlipHelper
@@ -116,7 +117,7 @@ class CGFlipHelper
 	}
 	static function getArticle($id, $params) {
 		// Get an instance of the generic articles model
-		$model     = JModelLegacy::getInstance('Article', 'ContentModel', array('ignore_request' => true));
+		$model     = new ArticleModel(array('ignore_request' => true));
         if ($model) {
 		// Set application parameters in model
 		$app       = Factory::getApplication();
@@ -130,7 +131,7 @@ class CGFlipHelper
 		$model->setState('filter.featured', $params->get('show_front', 1) == 1 ? 'show' : 'hide');
 
 		// Access filter
-		$access = JComponentHelper::getParams('com_content')->get('show_noauth');
+		$access = ComponentHelper::getParams('com_content')->get('show_noauth');
 		$authorised = Access::getAuthorisedViewLevels(Factory::getUser()->get('id'));
 		$model->setState('filter.access', $access);
 
@@ -167,7 +168,7 @@ class CGFlipHelper
 		if ($access || in_array($item->access, $authorised))
 		{
 			// We know that user has the privilege to view the article
-			$item->link = Route::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language));
+			$item->link = Route::_(RouteHelper::getArticleRoute($item->slug, $item->catid, $item->language));
 		}
 		else
 		{

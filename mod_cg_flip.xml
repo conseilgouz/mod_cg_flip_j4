@@ -2,12 +2,12 @@
 <extension version="4.0" type="module" method="upgrade" client="site">
 	<name>CG Flip</name>
 	<author>ConseilGouz</author>
-	<creationDate>2023/03/07</creationDate>
+	<creationDate>2023-09-21</creationDate>
 	<copyright>Copyright (C) 2023 ConseilGouz. All rights reserved</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>2.1.0</version>
+	<version>2.2.0</version>
 	<description>CG_XML_DESCRIPTION</description>
 	<namespace path="src">ConseilGouz\Module\CGFlip</namespace>
 	<scriptfile>script.php</scriptfile>
@@ -37,7 +37,9 @@
 	<config>
 		<fields name="params" >
 			<fieldset name="basic"
-				addruleprefix="ConseilGouz\Module\CGFlip\Site\Rule">
+				addruleprefix="ConseilGouz\Module\CGFlip\Site\Rule"
+				addfieldprefix="ConseilGouz\Module\CGPopup\Site\Field">
+				<field name="version" type="version"  margintop="-3em" extension="mod_cg_flip"/>				>
 				<field name="ratiotype" type="radio" label="CG_RATIO_TYPE" description="CG_RATIO_TYPE_DESC" 
 					class="btn-group" default="0">
                     <option value="0">CG_STANDARD</option>

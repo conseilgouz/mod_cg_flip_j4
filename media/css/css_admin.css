@@ -1,8 +1,8 @@
 /**
  * @package CG Flip Module
- * @version 2.0.4
+ * @version 2.1.1
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
- * @copyright (c) 2022 ConseilGouz. All Rights Reserved.
+ * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
  * 
  *						>>>	CSS for Admin display module  <<<
@@ -30,6 +30,9 @@
 }
 .control-group:nth-of-type(21){
 	float:left;width:50%;
+}
+.control-group:nth-of-type(22){
+	clear:both;
 }
 .controls textarea {width:70%}
 
