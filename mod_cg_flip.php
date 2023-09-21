@@ -1,7 +1,7 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.1.0 
+ * @version 2.2.0 
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -10,6 +10,8 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Helper\ModuleHelper;
+use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Language\Text;
 use ConseilGouz\Module\CGFlip\Site\Helper\CGFlipHelper;
 
 $document 		= Factory::getDocument();
@@ -23,19 +25,19 @@ $wa->registerAndUseStyle('up',$modulefield.'/css/up.css');
 $wa->registerAndUseScript('turn',$modulefield.'/js/turn.min.js');
 $wa->registerAndUseScript('magazine',$modulefield.'/js/magazine.min.js');
 if ((bool)Factory::getConfig()->get('debug')) { // Mode debug
-	$document->addScript(''.JURI::base(true).'/media/mod_cg_flip/js/cg_flip.js'); 
+	$document->addScript(''.URI::base(true).'/media/mod_cg_flip/js/cg_flip.js'); 
 } else {
 	$wa->registerAndUseScript('cgflip',$modulefield.'/js/cg_flip.min.js');
 }
 
 $font = '@font-face {
   font-family: "cgflip";
-  src: url("'.$modulefield.'/fonts/cgflip.eot?59685174");
-  src: url("'.$modulefield.'/fonts/cgflip.eot?59685174#iefix") format("embedded-opentype"),
-       url("'.$modulefield.'/fonts/cgflip.woff2?59685174") format("woff2"),
-       url("'.$modulefield.'/fonts/cgflip.woff?59685174") format("woff"),
-       url("'.$modulefield.'/fonts/cgflip.ttf?59685174") format("truetype"),
-       url("'.$modulefield.'/fonts/cgflip.svg?59685174#cgflip") format("svg");
+  src: url("'.URI::base(true).'/'.$modulefield.'/fonts/cgflip.eot?59685174");
+  src: url("'.URI::base(true).'/'.$modulefield.'/fonts/cgflip.eot?59685174#iefix") format("embedded-opentype"),
+       url("'.URI::base(true).'/'.$modulefield.'/fonts/cgflip.woff2?59685174") format("woff2"),
+       url("'.URI::base(true).'/'.$modulefield.'/fonts/cgflip.woff?59685174") format("woff"),
+       url("'.URI::base(true).'/'.$modulefield.'/fonts/cgflip.ttf?59685174") format("truetype"),
+       url("'.URI::base(true).'/'.$modulefield.'/fonts/cgflip.svg?59685174#cgflip") format("svg");
   font-weight: normal;
   font-style: normal;
 }';
@@ -79,7 +81,7 @@ if ($type == "dir") {
 } elseif ($type == "events") {
 	$pages =  CGFlipHelper::getFlipEvents($params);
 	$nbpages = count($pages);
-    if (($nbpages == 1) && (strpos($pages[0],JTEXT::_('CG_NO_EVENT')) !== false) && ($params->get('emptyhide', 'dir') == 'true')) return true; // no event
+    if (($nbpages == 1) && (strpos($pages[0],Text::_('CG_NO_EVENT')) !== false) && ($params->get('emptyhide', 'dir') == 'true')) return true; // no event
 }
 if ($params->get('ratiotype', '0') == '0') {
 	$ratio = $params->get('ratio', '1.41');
@@ -88,9 +90,9 @@ if ($params->get('ratiotype', '0') == '0') {
 	$ratio = str_replace(',','.',$ratio);
 }
 $document->addScriptOptions('cg_flip_'.$module->id, 
-	array('id' => $module->id,'base' => JURI::base(true),'type' => $type,'ratio' => $ratio
-		,'speffect' => $params->get('sp-effect','fadeIn'),'nbpages' => $nbpages,'onepage' => JText::_('CG_UNE_PAGE')
-		,'twopages' => JText::_('CG_DEUX_PAGE'),'init' => $params->get('init','double'),'init_phone' => $params->get('init_phone','single')
+	array('id' => $module->id,'base' => URI::base(true),'type' => $type,'ratio' => $ratio
+		,'speffect' => $params->get('sp-effect','fadeIn'),'nbpages' => $nbpages,'onepage' => Text::_('CG_UNE_PAGE')
+		,'twopages' => Text::_('CG_DEUX_PAGE'),'init' => $params->get('init','double'),'init_phone' => $params->get('init_phone','single')
 		,'files' => $files,'auto' => $params->get('auto', 'false'),'auto_delay' => $params->get('auto_delay', '3000'))
 	);
 
