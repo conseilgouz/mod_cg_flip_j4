@@ -39,7 +39,7 @@
 			<fieldset name="basic"
 				addruleprefix="ConseilGouz\Module\CGFlip\Site\Rule"
 				addfieldprefix="ConseilGouz\Module\CGPopup\Site\Field">
-				<field name="version" type="version"  margintop="-3em" extension="mod_cg_flip"/>				>
+				<field name="version" type="version"  margintop="-3em" extension="mod_cg_flip"/>				
 				<field name="ratiotype" type="radio" label="CG_RATIO_TYPE" description="CG_RATIO_TYPE_DESC" 
 					class="btn-group" default="0">
                     <option value="0">CG_STANDARD</option>
