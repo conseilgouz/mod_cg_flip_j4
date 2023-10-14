@@ -1,6 +1,6 @@
 /**
  * @package CG Flip Module
- * @version 2.1.1
+ * @version 2.2.1
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -10,28 +10,29 @@
 .form-horizontal .controls {
 	margin-left: 10px;
 }
-.control-group:nth-of-type(6){
+.control-group:nth-of-type(7){
 	float:left;width:50%;
 }
-.control-group:nth-of-type(7){ /* display */
+.control-group:nth-of-type(8){ /* display */
 	float:right;width:50%;
 }
-.control-group:nth-of-type(8){ /* phone display */
+.control-group:nth-of-type(9){ /* phone display */
 	float:left;width:50%;
 }
-.control-group:nth-of-type(9){ /* tyme menu */
-	float:right;width:50%;
+.control-group:nth-of-type(10){ /* CSS */
+	float:right;width:50%
 }
-.control-group:nth-of-type(10){ /* menu position */
+.control-group:nth-of-type(11){ /* CSS */
 	float:none;clear:both
 }
-.control-group:nth-of-type(20){
-	float:left;width:50%;
-}
+
 .control-group:nth-of-type(21){
 	float:left;width:50%;
 }
 .control-group:nth-of-type(22){
+	float:left;width:50%;
+}
+.control-group:nth-of-type(23){
 	clear:both;
 }
 .controls textarea {width:70%}
