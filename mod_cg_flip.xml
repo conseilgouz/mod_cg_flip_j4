@@ -2,12 +2,12 @@
 <extension version="4.0" type="module" method="upgrade" client="site">
 	<name>CG Flip</name>
 	<author>ConseilGouz</author>
-	<creationDate>2023-10-14</creationDate>
+	<creationDate>2023-10-30</creationDate>
 	<copyright>Copyright (C) 2023 ConseilGouz. All rights reserved</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>2.2.1</version>
+	<version>2.2.2</version>
 	<description>CG_XML_DESCRIPTION</description>
 	<namespace path="src">ConseilGouz\Module\CGFlip</namespace>
 	<scriptfile>script.php</scriptfile>
@@ -99,7 +99,7 @@
 					<option value="events">CG_EVENTS</option>
 				</field>
 				<field showon="cg_type:dir" name="dir" type="folderlist" default="" label="CG_DIR" description="CG_DIR_DESC" 
-					directory="images" filter="" exclude="" stripext="" />		
+					directory="images" filter="" exclude="" stripext="" recursive="true"/>		
 				<field	showon="cg_type:files" name="slideslist" type="subform" multiple="true" label="CG_SLIDE_LIST"
 					validate="thumbnail" default=""	formsource="/modules/mod_cg_flip/mod_cg_imgs.xml"
 				/>
