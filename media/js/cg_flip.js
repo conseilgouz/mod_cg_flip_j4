@@ -1,39 +1,21 @@
 /**
  * @package CG Flip Module
- * @version 2.0.4
- * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
- * @copyright (c) 2022 ConseilGouz. All Rights Reserved.
+ * @version 2.2.3
+ * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
+ * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
  */
 var $timestp = 0;
 jQuery(document).ready(function($) {
     $(".cg_flip_main").each(function() {
-		var $this = $(this);
-		var myid = $this.attr("data");
+		var $flipid = $(this).attr("data");
 		if (typeof Joomla === 'undefined' || typeof Joomla.getOptions === 'undefined') {
-			var options;
+			var flipoptions;
 		} else {
-			var options = Joomla.getOptions('cg_flip_'+myid);
+			var flipoptions = Joomla.getOptions('cg_flip_'+$flipid);
 		}
-		if (typeof options === 'undefined' ) { // cache Joomla problem
-			request = {
-				'option' : 'com_ajax',
-				'module' : 'cg_flip',
-				'data'   : 'param',
-				'id'     : myid,
-				'format' : 'raw'
-				};
-				$.ajax({
-					type   : 'POST',
-					data   : request,
-					success: function (response) {
-						options = JSON.parse(response);
-						go_flip($,myid,options,true);
-					}
-				});
-		};
-		if (typeof options !== 'undefined' ) {
-			go_flip($,myid,options,false);
+		if (typeof flipoptions !== 'undefined' ) {
+			go_flip($,$flipid,flipoptions,false);
 		}
 	});
 })
@@ -97,6 +79,33 @@ function go_flip($,myid,options,ajax) {
 					me = ".cg_flip_"+ $(this).attr('data-id');
 					$( me + ' .magazine').turn('page',$page);
 				});
+				if ($(me + ' #magazine-viewport').outerWidth(true) > 767) {
+					view.forEach(function($page) {	// one page / two-pages on click
+						$(me + ' .page.p'+$page).off('click');
+						$(me + ' .page.p'+$page).click(function(e) { 
+							if ($(me + ' .magazine').turn("zoom")> 1) return; // ignore click 
+							if ($(me + ' #cg_page').hasClass("ison-doc")) {
+								$page = this.parentNode.parentNode.getAttribute('page');
+								$(me + " #cg_zoom_in").addClass("cg_hide"); // hide zoom
+								$(me + ' .magazine').turn("display", "single");
+								$turn_options = $(me + ' .magazine').turn('options');
+								$(me + ' .magazine').turn("size", $turn_options.width , $turn_options.height * 2);
+								$(me + ' #cg_page').removeClass('ison-doc').addClass('ison-book-open');	
+								$(me + " #cg_page").attr({"title":options.twopages});;
+								$( me + ' .magazine').turn('page',$page).turn('stop');
+							} else {
+								$(me + " #cg_zoom_in").removeClass("cg_hide"); // show zoom again
+								$(me + ' .magazine').turn("display", "double");
+								$turn_options = $(me + ' .magazine').turn('options');
+								$(me + ' .magazine').turn("size", $turn_options.width, $turn_options.height);
+								$(me + ' #cg_page').removeClass('ison-book-open').addClass('ison-doc');	
+								$(me + " #cg_page").attr({"title":options.onepage});
+								$(me + ' .magazine').css('height:'+ $turn_options.height );
+								$(me + ' .magazine-viewport').css('height:'+ $turn_options.height );
+							}
+						});
+					});
+				}
 			},
 			missing: function (event, pages) {
 				if ((options.type == "dir") || (options.type == "files")) { 
@@ -106,11 +115,13 @@ function go_flip($,myid,options,ajax) {
 					for (var i = 0; i < $pagesArray.length; i++)
 						$(this).turn("addPage", $pagesArray[i],i + 1);
 				} 
-				}
 			}
+		}// when
 	});
+	
 	$(window).keydown(function(e){ // Using arrow keys to turn the page
 		var beg = 36, prev_2 = 33, previous = 37, next_2= 34, next = 39, mult = 106, mult_alpha = 220, end = 35;
+		var z=90;
 		switch (e.keyCode) {
 			case beg: 
 				$(me + ' .magazine').turn('page',1);
@@ -198,7 +209,7 @@ function go_flip($,myid,options,ajax) {
 			$(me + ' .magazine-viewport').css('height:'+ $turn_options.height );
 		}
 	});
-	$(me).resize(function() {
+	$(window).resize(function() {
 		resizeViewport(me);
 	}).bind('orientationchange', function() {
 		resizeViewport(me);
