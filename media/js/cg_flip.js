@@ -1,6 +1,6 @@
 /**
  * @package CG Flip Module
- * @version 2.2.3
+ * @version 2.2.4
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -79,7 +79,9 @@ function go_flip($,myid,options,ajax) {
 					me = ".cg_flip_"+ $(this).attr('data-id');
 					$( me + ' .magazine').turn('page',$page);
 				});
+				if (options.clickpage == 'false') return; 
 				if ($(me + ' #magazine-viewport').outerWidth(true) > 767) {
+				// add one/2pages onclick event on new pages 
 					view.forEach(function($page) {	// one page / two-pages on click
 						$(me + ' .page.p'+$page).off('click');
 						$(me + ' .page.p'+$page).click(function(e) { 
@@ -115,10 +117,10 @@ function go_flip($,myid,options,ajax) {
 					for (var i = 0; i < $pagesArray.length; i++)
 						$(this).turn("addPage", $pagesArray[i],i + 1);
 				} 
-			}
+			}// missing
 		}// when
-	});
-	
+	}); // turn
+
 	$(window).keydown(function(e){ // Using arrow keys to turn the page
 		var beg = 36, prev_2 = 33, previous = 37, next_2= 34, next = 39, mult = 106, mult_alpha = 220, end = 35;
 		var z=90;

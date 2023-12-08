@@ -2,6 +2,17 @@
 	<changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
+		<version>2.2.4</version>
+        <note>
+            <item>Update : 08/12/2023</item>
+        </note>
+        <addition>
+            <item>1 page/2 pages on click parameter</item>
+        </addition>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
 		<version>2.2.3</version>
         <note>
             <item>Update : 30/10/2023</item>
