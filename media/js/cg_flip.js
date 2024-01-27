@@ -1,8 +1,8 @@
 /**
  * @package CG Flip Module
- * @version 2.2.4
+ * @version 2.2.6
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
- * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
+ * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
  */
 var $timestp = 0;
@@ -26,22 +26,12 @@ function go_flip($,myid,options,ajax) {
 	var isPhone = (divWidth < 768);
 	var turnHeight = (divWidth * ratio) / 2;
 	if ((options.type == "dir") || (options.type == "files")) { //images
-	    if (ajax) {  // from AJAX request
-			var $pagesArray = [],key;
-			for (key in options.files) {
-				$pagesArray.push(options.files[key]);
-			}
-		} else {
-			var $pagesArray = options.files;
-		}
+		var $pagesArray = options.files;
 	} else { // articles or events
 		var $pagesArray = [];
 		$(me + ' .cg_flip_article').each(function() {
 			$pagesArray.push($(this).html());
 		});	
-		if (ajax) { // nombre de pages non encore calculé....
-			options.nbpages = $pagesArray.length;
-		}
 	} 
 	$(me + ' .cg_flip_menu').click(function(){ // aide
 		if ($(me + ' #cg_aide').hasClass('cg_show')) {

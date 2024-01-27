@@ -2,12 +2,12 @@
 <extension version="4.0" type="module" method="upgrade" client="site">
 	<name>CG Flip</name>
 	<author>ConseilGouz</author>
-	<creationDate>2023-12-08</creationDate>
+	<creationDate>2024-01-27</creationDate>
 	<copyright>Copyright (C) 2023 ConseilGouz. All rights reserved</copyright>
-	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2</license>
+	<license>https://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv2</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>2.2.5</version>
+	<version>2.2.6</version>
 	<description>CG_XML_DESCRIPTION</description>
 	<namespace path="src">ConseilGouz\Module\CGFlip</namespace>
 	<scriptfile>script.php</scriptfile>
@@ -105,6 +105,12 @@
 				</field>
 				<field showon="cg_type:dir" name="dir" type="folderlist" default="" label="CG_DIR" description="CG_DIR_DESC" 
 					directory="images" filter="" exclude="" stripext="" recursive="true"/>		
+				<field showon="cg_type:dir" name="types" type="list" label="CG_TYPES" description="CG_TYPES_DESC" 
+					default="*" layout="joomla.form.field.list-fancy-select" multiple="true"	>		
+					<option value="jpg">JPG</option>
+					<option value="png">PNG</option>
+					<option value="webp">WEBP</option>
+				</field>
 				<field	showon="cg_type:files" name="slideslist" type="subform" multiple="true" label="CG_SLIDE_LIST"
 					validate="thumbnail" default=""	formsource="/modules/mod_cg_flip/mod_cg_imgs.xml"
 				/>

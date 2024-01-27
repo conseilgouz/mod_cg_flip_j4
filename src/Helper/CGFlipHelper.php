@@ -1,9 +1,9 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.1.1
+ * @version 2.2.6
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
- * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
+ * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
  */
  namespace ConseilGouz\Module\CGFlip\Site\Helper;
@@ -534,79 +534,5 @@ class CGFlipHelper
 			';
 		}
 		return $buttons;
-	}
-//------------------------------------------------ AJAX Request --------------------------------------	
-	public static function getAjax() {
-        $input = Factory::getApplication()->input;
-		$id = $input->get('id');
-		$module = self::getModuleById($id);
-		$params = new Registry($module->params);  		
-        $output = '';
-		if ($input->get('data') == "param") {
-			return self::getParams($id,$params);
-		}
-		return false;
-	}
-// Get Module per ID
-	private static function getModuleById($id) {
-		$db = Factory::getDbo();
-		$query = $db->getQuery(true)
-			->select('m.id, m.title, m.module, m.position, m.content, m.showtitle, m.params')
-			->from('#__modules AS m')
-			->where('m.id = '.(int)$id);
-		$db->setQuery($query);
-		return $db->loadObject();
-	}
-	private static function getParams($id,$params) {
-		$files = array();
-		$type = $params->get('cg_type', 'dir');
-		$optimize = $params->get('optimize', '0');
-		if ($type == "dir") {
-			$dir =  $params->get('dir', '');
-			if ($optimize == '1') $dir .= '/th';
-			$files = glob('images/'.$dir.'/*.{jpg,png}',GLOB_BRACE); 
-			$nbpages = count($files);
-		} elseif ($type == "files") {
-			$fileslist = $params->get('slideslist');
-			$files = array();
-			foreach ($fileslist as $file) {
-				$imgname = $file->file_name;
-				if ($optimize == '1')  {
-					$imgthumb = $imgname;
-					$pos = strrpos($imgthumb,'/');
-					$len = strlen($imgthumb);
-					$imgthumb = substr($imgthumb,0,$pos+1).'th/'.substr($imgthumb,$pos+1,$len);
-					$files[] = $imgthumb;
-				} else {
-					$files[] = $imgname;
-				}
-			}
-			$nbpages = count($files);
-		} elseif ($type == "articles") {
-			$nbpages = 0;
-		}
-		if ($params->get('ratiotype', '0') == '0') {
-			$ratio = $params->get('ratio', '1.41');
-		} else {
-			$ratio = $params->get('ratio_perso', '1.0');
-			$ratio = str_replace(',','.',$ratio);
-		}	
-		$files_java = '{"';
-		$ix=0;
-		foreach ($files as $afile) {
-		      if ($files_java != '{"') $files_java .= '","';
-		      $files_java .= $ix.'":"'.$afile;
-			  $ix +=1;
-		}
-		if ($files_java != '{"') {
-			$files_java .= '"}';
-		} else {
-			$files_java = '""';
-		}
-		$ret = '{"id" :"'.$id.'","base":"'.URI::base(true).'","type":"'.$type.'","ratio":"'.$ratio.'"';
-		$ret .= ',"speffect":"'.$params->get('sp-effect','fadeIn').'","nbpages":"'.$nbpages.'","onepage":"'.Text::_('CG_UNE_PAGE').'"';
-		$ret .= ',"twopages":"'.Text::_('CG_DEUX_PAGE').'","init":"'.$params->get('init','double').'"';
-		$ret .= ',"init_phone":"'.$params->get('init_phone','single').'","files":'.$files_java.'}';
-		return $ret;
 	}
 }

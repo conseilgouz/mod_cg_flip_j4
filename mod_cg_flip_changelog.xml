@@ -2,6 +2,21 @@
 	<changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
+		<version>2.2.6</version>
+        <note>
+            <item>Update : 27/01/2024</item>
+        </note>
+        <addition>
+            <item>allow webp images</item>
+            <item>images directory : select images type to display</item>
+        </addition>
+        <fix>
+            <item>Remove unnecessary code (ajax)</item>
+        </fix>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
 		<version>2.2.5</version>
         <note>
             <item>Update : 08/12/2023</item>
