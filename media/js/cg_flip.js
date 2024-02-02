@@ -102,7 +102,7 @@ function go_flip($,myid,options,ajax) {
 			missing: function (event, pages) {
 				if ((options.type == "dir") || (options.type == "files")) { 
 					for (var i = 0; i < pages.length; i++)
-						addPage(pages[i], $(this), options.base,$pagesArray[pages[i] - 1]);
+						addPage(pages[i], $(this), options.base,$pagesArray[pages[i] - 1],options.zoom,options.magnify);
 				} else {
 					for (var i = 0; i < $pagesArray.length; i++)
 						$(this).turn("addPage", $pagesArray[i],i + 1);

@@ -105,7 +105,7 @@ $document->addScriptOptions('cg_flip_'.$module->id,
 	array('id' => $module->id,'base' => URI::base(true),'type' => $type,'ratio' => $ratio
 		,'speffect' => $params->get('sp-effect','fadeIn'),'nbpages' => $nbpages,'onepage' => Text::_('CG_UNE_PAGE')
 		,'twopages' => Text::_('CG_DEUX_PAGE'),'init' => $params->get('init','double'),'init_phone' => $params->get('init_phone','single')
-		,'files' => $files,'auto' => $params->get('auto', 'false'),'auto_delay' => $params->get('auto_delay', '3000'),'clickpage'=>$params->get('clickpage','false'))
+		,'files' => $files,'auto' => $params->get('auto', 'false'),'auto_delay' => $params->get('auto_delay', '3000'),'clickpage'=>$params->get('clickpage','false'),'zoom' => $params->get('zoom','0'),'magnify'=>$params->get('magnify','1'))
 	);
 
 

@@ -5,7 +5,7 @@
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
 **/
-function addPage(page, book, dir, file) {
+function addPage(page, book, dir, file,zoom,magnify) {
 	var id, pages = book.turn('pages');
 	// Create a new element for this page
 	var element = jQuery('<div />', {});
@@ -15,23 +15,27 @@ function addPage(page, book, dir, file) {
 		// It will contain a loader indicator and a gradient
 		element.html('<div class="gradient"></div><div class="loader"></div>');
 		// Load the page
-		loadPage(page, element,dir,file);
+		loadPage(page, element,dir,file,zoom,magnify);
 	}
 }
-function loadPage(page, pageElement,dir,file) {
+function loadPage(page, pageElement,dir,file,zoom,magnify) {
 	var img = jQuery('<img />');
 	img.mousedown(function(e) {
 		e.preventDefault();
 	});
-	img.on('load', function() {
+	img.on('load', function(event,zoom,magnify) {
 		// Set the size
 		jQuery(this).css({width: '100%', height: '100%'});
 		jQuery(this).appendTo(pageElement);
 		pageElement.find('.loader').remove();
-		jQuery(this).parent().addClass('zoom');
-		jQuery(this).parent().zoom({ on:'grab' });
+		if (jQuery(this).data('zoom') == "1") {
+			jQuery(this).parent().addClass('zoom');
+			jQuery(this).parent().zoom({magnify: jQuery(this).data('magnify'), on:'grab' });
+		}
 	});
 	img.attr('src', dir + '/' + file);
+	img.data('zoom',zoom);
+	img.data('magnify',magnify);
 }
 // http://code.google.com/p/chromium/issues/detail?id=128488
 function isChrome() {
