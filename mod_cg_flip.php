@@ -1,7 +1,7 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.2.6 
+ * @version 2.3.0 
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -23,8 +23,7 @@ $wa = Factory::getDocument()->getWebAssetManager();
 $wa->registerAndUseStyle('cgflip',$modulefield.'/css/cgflip.min.css'); 
 $wa->registerAndUseStyle('up',$modulefield.'/css/up.css'); 
 $wa->registerAndUseScript('turn',$modulefield.'/js/turn.min.js');
-$wa->registerAndUseScript('zoom',$modulefield.'/js/zoom.min.js');
-//$wa->registerAndUseScript('browser',$modulefield.'/js/page-flip.browser.js');
+$wa->registerAndUseScript('zoom',$modulefield.'/js/jquery.zoom.js');
 $wa->registerAndUseScript('magazine',$modulefield.'/js/magazine.min.js');
 if ((bool)Factory::getConfig()->get('debug')) { // Mode debug
 	$document->addScript(''.URI::base(true).'/media/mod_cg_flip/js/cg_flip.js'); 

@@ -1,6 +1,6 @@
 /**
  * @package CG Flip Module
- * @version 2.2.6
+ * @version 2.4.0
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -110,7 +110,6 @@ function go_flip($,myid,options,ajax) {
 			}// missing
 		}// when
 	}); // turn
-
 	$(window).keydown(function(e){ // Using arrow keys to turn the page
 		var beg = 36, prev_2 = 33, previous = 37, next_2= 34, next = 39, mult = 106, mult_alpha = 220, end = 35;
 		var z=90;

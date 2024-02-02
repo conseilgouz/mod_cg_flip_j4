@@ -1,12 +1,12 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.0.4
+ * @version 2.4.0
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
- * @copyright (c) 2022 ConseilGouz. All Rights Reserved.
+ * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
  */
- use ConseilGouz\Module\CGFlip\Site\Helper\CGFlipHelper;
+use ConseilGouz\Module\CGFlip\Site\Helper\CGFlipHelper;
 
 defined('_JEXEC') or die('Restricted access'); 
 if ($params->get('ratiotype', '0') == '0') {
