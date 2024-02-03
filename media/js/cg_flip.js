@@ -1,6 +1,6 @@
 /**
  * @package CG Flip Module
- * @version 2.4.0
+ * @version 2.4.3
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -144,7 +144,14 @@ function go_flip($,myid,options,ajax) {
 					$turn_options = $(me + ' .magazine').turn('options');
 					$(me + ' .magazine').turn("size", $turn_options.width , $turn_options.height * 2);
 					$(me + ' #cg_page').removeClass('ison-doc').addClass('ison-book-open');	
-					$(me + " #cg_page").attr({"title":options.twopages});;
+					$(me + " #cg_page").attr({"title":options.twopages});
+					if (options.zoom == "3") {// wheelzoom
+						imgs = document.querySelectorAll('img.zoom');
+						imgs.forEach (function (img) {
+							img.dispatchEvent(new Event("wheelzoom.destroy"));
+						});
+						wheelzoom(document.querySelectorAll('img.zoom'));
+					}
 				} else {
 					$(me + " #cg_zoom_in").removeClass("cg_hide"); // show zoom again
 					$(me + ' .magazine').turn("display", "double");
@@ -154,6 +161,13 @@ function go_flip($,myid,options,ajax) {
 					$(me + " #cg_page").attr({"title":options.onepage});
 					$(me + ' .magazine').css('height:'+ $turn_options.height );
 					$(me + ' .magazine-viewport').css('height:'+ $turn_options.height );
+					if (options.zoom == "3") {// wheelzoom
+						imgs = document.querySelectorAll('img.zoom');
+						imgs.forEach (function (img) {
+							img.dispatchEvent(new Event("wheelzoom.destroy"));
+						});
+						wheelzoom(document.querySelectorAll('img.zoom'));
+					}
 				}
 				e.preventDefault();
 				break;
@@ -188,7 +202,14 @@ function go_flip($,myid,options,ajax) {
 			$(me + ' .magazine').turn("size", $turn_options.width , $turn_options.height * 2);
 			$(me + ' .magazine-viewport').addClass("double");
 			$(me + ' #cg_page').removeClass('ison-doc').addClass('ison-book-open');	
-			$(me + " #cg_page").attr({"title":options.twopages});;
+			$(me + " #cg_page").attr({"title":options.twopages});
+			if (options.zoom == "3") {// wheelzoom
+				imgs = document.querySelectorAll('img.zoom');
+				imgs.forEach (function (img) {
+					img.dispatchEvent(new Event("wheelzoom.destroy"));
+				});
+				wheelzoom(document.querySelectorAll('img.zoom'));
+			}
 		} else {
 			$(me + ' .magazine').turn("display", "double");
 			$turn_options = $(me + ' .magazine').turn('options');
@@ -198,6 +219,13 @@ function go_flip($,myid,options,ajax) {
 			$(me + ' .magazine-viewport').removeClass("double");
 			$(me + ' .magazine').css('height:'+ $turn_options.height );
 			$(me + ' .magazine-viewport').css('height:'+ $turn_options.height );
+			if (options.zoom == "3") {// wheelzoom
+				imgs = document.querySelectorAll('img.zoom');
+				imgs.forEach (function (img) {
+					img.dispatchEvent(new Event("wheelzoom.destroy"));
+				});
+				wheelzoom(document.querySelectorAll('img.zoom'));
+			}
 		}
 	});
 	$(window).resize(function() {

@@ -2,6 +2,17 @@
 	<changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
+		<version>2.4.3</version>
+        <note>
+            <item>Update : 03/02/2024</item>
+        </note>
+        <fix>
+            <item>Wheelzoom : resize on one page/2pages switch</item>
+		</fix>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
 		<version>2.4.2</version>
         <note>
             <item>Update : 03/02/2024</item>
