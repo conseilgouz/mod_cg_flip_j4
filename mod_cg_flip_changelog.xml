@@ -2,7 +2,19 @@
 	<changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
-		<version>2.3.0</version>
+		<version>2.4.1</version>
+        <note>
+            <item>Update : 03/02/2024</item>
+        </note>
+        <addition>
+            <item>Add zoom on click</item>
+            <item>Add mouse wheel zoom </item>
+		</addition>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
+		<version>2.4.0</version>
         <note>
             <item>Update : 02/02/2024</item>
         </note>

@@ -1,10 +1,11 @@
 /**
  * @package CG Flip Module
- * @version 2.4.0
+ * @version 2.4.1
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
 **/
+var imgcount = 0;
 function addPage(page, book, dir, file,zoom,magnify) {
 	var id, pages = book.turn('pages');
 	// Create a new element for this page
@@ -28,14 +29,32 @@ function loadPage(page, pageElement,dir,file,zoom,magnify) {
 		jQuery(this).css({width: '100%', height: '100%'});
 		jQuery(this).appendTo(pageElement);
 		pageElement.find('.loader').remove();
-		if (jQuery(this).data('zoom') == "1") {
+		pageElement.find('.gradient').remove();
+		if ((jQuery(this).data('zoom') == "1") || (jQuery(this).data('zoom') == "2") ) { // zoom
 			jQuery(this).parent().addClass('zoom');
-			jQuery(this).parent().zoom({magnify: jQuery(this).data('magnify'), on:'grab' });
+			url = false;
+			if (this.src.indexOf('/th/') > 0){ // 
+				url = this.src.replace('/th/','/');
+			}
+			on = 'grab';
+			if (jQuery(this).data('zoom') == "2") on = 'click';
+			jQuery(this).parent().zoom({url: url,magnify: jQuery(this).data('magnify'), on:on });
+		}
+		if (jQuery(this).data('zoom') == "3") { // wheelzoom
+		    if (jQuery(this).hasClass('todo')) {
+				wheelzoom(this);  
+				jQuery(this).removeClass('todo')
+			}
 		}
 	});
+	if ((zoom == '3') && (file.indexOf('/th/') > 0)){ // wheelzoom
+		file = file.replace('/th/','/');
+	}
 	img.attr('src', dir + '/' + file);
 	img.data('zoom',zoom);
 	img.data('magnify',magnify);
+	if (zoom == "3") // wheelzoom
+		img.addClass('zoom todo'); 
 }
 // http://code.google.com/p/chromium/issues/detail?id=128488
 function isChrome() {
