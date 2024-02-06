@@ -8,6 +8,7 @@
         </note>
         <fix>
             <item>Phone : disable zoom</item>
+            <item>Debug : cgflip.css does not match cgflip.min.css</item>
 		</fix>
 	</changelog>
 	<changelog>
