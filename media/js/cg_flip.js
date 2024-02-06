@@ -81,6 +81,7 @@ function go_flip($,myid,options,ajax) {
 								$page = this.parentNode.parentNode.getAttribute('page');
 								$(me + " #cg_zoom_in").addClass("cg_hide"); // hide zoom
 								$(me + ' .magazine').turn("display", "single");
+								$(me + ' .magazine-viewport').addClass("single");								
 								$turn_options = $(me + ' .magazine').turn('options');
 								$(me + ' .magazine').turn("size", $turn_options.width , $turn_options.height * 2);
 								$(me + ' #cg_page').removeClass('ison-doc').addClass('ison-book-open');	
@@ -94,6 +95,7 @@ function go_flip($,myid,options,ajax) {
 								$(me + ' #cg_page').removeClass('ison-book-open').addClass('ison-doc');	
 								$(me + " #cg_page").attr({"title":options.onepage});
 								$(me + ' .magazine').css('height:'+ $turn_options.height );
+								$(me + ' .magazine-viewport').removeClass("single");
 								$(me + ' .magazine-viewport').css('height:'+ $turn_options.height );
 							}
 						});
@@ -143,6 +145,7 @@ function go_flip($,myid,options,ajax) {
 					$(me + " #cg_zoom_in").addClass("cg_hide"); // hide zoom
 					$(me + ' .magazine').turn("display", "single");
 					$turn_options = $(me + ' .magazine').turn('options');
+					$(me + ' .magazine-viewport').addClass("single");					
 					$(me + ' .magazine').turn("size", $turn_options.width , $turn_options.height * 2);
 					$(me + ' #cg_page').removeClass('ison-doc').addClass('ison-book-open');	
 					$(me + " #cg_page").attr({"title":options.twopages});
@@ -162,6 +165,7 @@ function go_flip($,myid,options,ajax) {
 					$(me + " #cg_page").attr({"title":options.onepage});
 					$(me + ' .magazine').css('height:'+ $turn_options.height );
 					$(me + ' .magazine-viewport').css('height:'+ $turn_options.height );
+					$(me + ' .magazine-viewport').removeClass("single");
 					if (options.zoom == "3") {// wheelzoom
 						imgs = document.querySelectorAll('img.zoom');
 						imgs.forEach (function (img) {
@@ -201,7 +205,7 @@ function go_flip($,myid,options,ajax) {
 			$(me + ' .magazine').turn("display", "single");
 			$turn_options = $(me + ' .magazine').turn('options');
 			$(me + ' .magazine').turn("size", $turn_options.width , $turn_options.height * 2);
-			$(me + ' .magazine-viewport').addClass("double");
+			$(me + ' .magazine-viewport').addClass("single");
 			$(me + ' #cg_page').removeClass('ison-doc').addClass('ison-book-open');	
 			$(me + " #cg_page").attr({"title":options.twopages});
 			if (options.zoom == "3") {// wheelzoom
@@ -217,7 +221,7 @@ function go_flip($,myid,options,ajax) {
 			$(me + ' .magazine').turn("size", $turn_options.width, $turn_options.height);
 			$(me + ' #cg_page').removeClass('ison-book-open').addClass('ison-doc');	
 			$(me + " #cg_page").attr({"title":options.onepage});
-			$(me + ' .magazine-viewport').removeClass("double");
+			$(me + ' .magazine-viewport').removeClass("single");
 			$(me + ' .magazine').css('height:'+ $turn_options.height );
 			$(me + ' .magazine-viewport').css('height:'+ $turn_options.height );
 			if (options.zoom == "3") {// wheelzoom
@@ -239,7 +243,7 @@ function go_flip($,myid,options,ajax) {
 		$(me+ ' .magazine').turn("display", "single");
 		$turn_options = $(me + ' .magazine').turn('options');
 		$(me + ' .magazine').turn("size", $turn_options.width , $turn_options.height * 2);
-		$(me + ' .magazine-viewport').addClass("double");
+		$(me + ' .magazine-viewport').addClass("single");
 		$(me + ' #cg_page').removeClass('ison-doc').addClass('ison-book-open');	
 		$(me + " #cg_page").attr({"title":options.twopages});;
 	}
