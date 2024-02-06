@@ -9,6 +9,7 @@
         <fix>
             <item>Phone : disable zoom</item>
             <item>Debug : cgflip.css does not match cgflip.min.css</item>
+            <item>One page/2 pages : add/remove class single to magazine-viewport</item>
 		</fix>
 	</changelog>
 	<changelog>
