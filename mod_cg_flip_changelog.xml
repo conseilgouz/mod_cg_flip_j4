@@ -2,6 +2,18 @@
 	<changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
+		<version>2.4.5</version>
+        <note>
+            <item>Update : 07/02/2024</item>
+        </note>
+        <fix>
+            <item>Phone : resize error</item>
+            <item>default.php: remove unused div cg-container</item>
+		</fix>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
 		<version>2.4.4</version>
         <note>
             <item>Update : 05/02/2024</item>

@@ -1,6 +1,6 @@
 /**
  * @package CG Flip Module
- * @version 2.4.4
+ * @version 2.4.5
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -234,9 +234,9 @@ function go_flip($,myid,options,ajax) {
 		}
 	});
 	$(window).resize(function() {
-		resizeViewport(me);
+		resizeViewport(me,ratio);
 	}).bind('orientationchange', function() {
-		resizeViewport(me);
+		resizeViewport(me,ratio);
 	});
 	if ( ( options.init == 'single') || (isPhone && (options.init_phone == 'single')) ) {
 		$(me + ' .magazine').addClass('animated');

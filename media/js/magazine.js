@@ -1,6 +1,6 @@
 /**
  * @package CG Flip Module
- * @version 2.4.1
+ * @version 2.4.5
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -60,32 +60,24 @@ function loadPage(page, pageElement,dir,file,zoom,magnify) {
 function isChrome() {
 	return navigator.userAgent.indexOf('Chrome')!=-1;
 }
-function resizeViewport(me) {
-	var width = jQuery(window).width(),
-		height = jQuery(window).height(),
-		options = jQuery(me + ' .magazine').turn('options');
+function resizeViewport(me,ratio) {
+	var width = $(me + ' #magazine-viewport').outerWidth(true),
+		height = width * ratio;
+	if (!jQuery(me+' .magazine-viewport').hasClass('single')) height = height / 2;
 	jQuery(me + ' .magazine').removeClass('animated');
 	jQuery(me + ' .magazine-viewport').css({
 		width: width,
 		height: height
 	});
 	if (jQuery(me + ' .magazine').turn('zoom')==1) {
-		var bound = calculateBound({
-			width: options.width,
-			height: options.height,
-			boundWidth: Math.min(options.width, width),
-			boundHeight: Math.min(options.height, height)
-		});
-		if (bound.width%2!==0)
-			bound.width-=1;
-		if (bound.width!=jQuery(me + ' .magazine').width() || bound.height!=jQuery(me +  '.magazine').height()) {
-			jQuery(me + ' .magazine').turn('size', bound.width, bound.height);
+		if (width%2!==0)
+			width-=1;
+		if (width!=jQuery(me + ' .magazine').width() || height!=jQuery(me +  '.magazine').height()) {
+			jQuery(me + ' .magazine').turn('size', width, height);
 			if (jQuery(me + ' .magazine').turn('page')==1)
 				jQuery(me + ' .magazine').turn('peel', 'br');
-			jQuery(me + ' .next-button').css({height: bound.height, backgroundPosition: '-38px '+(bound.height/2-32/2)+'px'});
-			jQuery(me + ' .previous-button').css({height: bound.height, backgroundPosition: '-4px '+(bound.height/2-32/2)+'px'});
 		}
-		jQuery(me + ' .magazine').css({top: -bound.height/2, left: -bound.width/2});
+		jQuery(me + ' .magazine').css({top: -height/2, left: -width/2});
 	}
 	var magazineOffset = jQuery(me + ' .magazine').offset(),
 		boundH = height - magazineOffset.top - jQuery(me + ' .magazine').height(),
@@ -96,31 +88,4 @@ function resizeViewport(me) {
 		jQuery('.made').show();
 	jQuery(me + ' .magazine').addClass('animated');
 }
-
-// Calculate the width and height of a square within another square
-
-function calculateBound(d) {
-	
-	var bound = {width: d.width, height: d.height};
-
-	if (bound.width>d.boundWidth || bound.height>d.boundHeight) {
-		
-		var rel = bound.width/bound.height;
-
-		if (d.boundWidth/rel>d.boundHeight && d.boundHeight*rel<=d.boundWidth) {
-			
-			bound.width = Math.round(d.boundHeight*rel);
-			bound.height = d.boundHeight;
-
-		} else {
-			
-			bound.width = d.boundWidth;
-			bound.height = Math.round(d.boundWidth/rel);
-		
-		}
-	}
-		
-	return bound;
-}
-
 

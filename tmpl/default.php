@@ -1,9 +1,9 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.4.0
- * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
- * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
+ * @version 2.4.5
+ * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
+ * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
  */
 use ConseilGouz\Module\CGFlip\Site\Helper\CGFlipHelper;
@@ -29,9 +29,7 @@ $init_phone = $params->get('init_phone','single');
 		echo "</div>";
 		} ?>
 <div class="magazine-viewport" id="magazine-viewport">
-	<div class="cg-container">
-		<div class="magazine">
-		</div>
+	<div class="magazine">
 	</div>
 </div>
 <?php if (($params->get('typemenu', 'full') != 'aucun') && ($params->get('menu', 'bas') == 'bas')) { 
