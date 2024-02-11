@@ -2,6 +2,17 @@
 	<changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
+		<version>2.4.6</version>
+        <note>
+            <item>Update : 11/02/2024</item>
+        </note>
+        <fix>
+            <item>Use Browser class to determine device : phone/computer</item>
+		</fix>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
 		<version>2.4.5</version>
         <note>
             <item>Update : 07/02/2024</item>

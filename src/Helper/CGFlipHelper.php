@@ -1,7 +1,7 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.2.6
+ * @version 2.4.6
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -19,6 +19,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\Component\Content\Site\Model\ArticlesModel; 
 use Joomla\Component\Content\Site\Model\ArticleModel; 
 use Joomla\Component\Content\Site\Helper\RouteHelper; 
+use Joomla\CMS\Environment\Browser;
 
 class CGFlipHelper
 {
@@ -535,4 +536,11 @@ class CGFlipHelper
 		}
 		return $buttons;
 	}
+	// 
+	static function detectDevice()
+	{
+		$detect = new Browser;
+		return ($detect->isMobile() ? ($detect->isRobot() ? 'robot' : 'phone') : 'computer');
+	}
+	
 }

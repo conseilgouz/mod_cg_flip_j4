@@ -1,7 +1,7 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.4.2 
+ * @version 2.4.6 
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -105,11 +105,12 @@ if ($params->get('ratiotype', '0') == '0') {
 	$ratio = $params->get('ratio_perso', '1.0');
 	$ratio = str_replace(',','.',$ratio);
 }
+
 $document->addScriptOptions('cg_flip_'.$module->id, 
 	array('id' => $module->id,'base' => URI::base(true),'type' => $type,'ratio' => $ratio
 		,'speffect' => $params->get('sp-effect','fadeIn'),'nbpages' => $nbpages,'onepage' => Text::_('CG_UNE_PAGE')
 		,'twopages' => Text::_('CG_DEUX_PAGE'),'init' => $params->get('init','double'),'init_phone' => $params->get('init_phone','single')
-		,'files' => $files,'auto' => $params->get('auto', 'false'),'auto_delay' => $params->get('auto_delay', '3000'),'clickpage'=>$params->get('clickpage','false'),'zoom' => $params->get('zoom','0'),'magnify'=>$params->get('magnify','1'))
+		,'files' => $files,'auto' => $params->get('auto', 'false'),'auto_delay' => $params->get('auto_delay', '3000'),'clickpage'=>$params->get('clickpage','false'),'zoom' => $params->get('zoom','0'),'magnify'=>$params->get('magnify','1'),'device' => CGFlipHelper::detectDevice())
 	);
 
 

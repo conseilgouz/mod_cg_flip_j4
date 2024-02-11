@@ -1,6 +1,6 @@
 /**
  * @package CG Flip Module
- * @version 2.4.5
+ * @version 2.4.6
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -23,7 +23,7 @@ function go_flip($,myid,options,ajax) {
 	var me = ".cg_flip_"+myid;
 	var ratio = options.ratio;
 	var divWidth = $(me + ' #magazine-viewport').outerWidth(true);
-	var isPhone = (divWidth < 768);
+	var isPhone = (options.device == 'phone');
 	var turnHeight = (divWidth * ratio) / 2;
 	if (isPhone) options.zoom = "0"; // phone : disable zoom
 	if ((options.type == "dir") || (options.type == "files")) { //images
