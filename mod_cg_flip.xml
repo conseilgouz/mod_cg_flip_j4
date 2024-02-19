@@ -2,12 +2,12 @@
 <extension version="4.0" type="module" method="upgrade" client="site">
 	<name>CG Flip</name>
 	<author>ConseilGouz</author>
-	<creationDate>2024-02-11</creationDate>
+	<creationDate>2024-02-19</creationDate>
 	<copyright>Copyright (C) 2024 ConseilGouz. All rights reserved</copyright>
 	<license>https://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv2</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>2.4.6</version>
+	<version>2.4.7</version>
 	<description>CG_XML_DESCRIPTION</description>
 	<namespace path="src">ConseilGouz\Module\CGFlip</namespace>
 	<scriptfile>script.php</scriptfile>
@@ -123,6 +123,14 @@
                 </field>
 				<field showon="zoom:1,2" name="magnify" type="number" label="CG_ZOOM_MAGNIFY" description="CG_ZOOM_MAGNIFY_DESC" 
 					default="1.5" min="0.5" max="3" step="0.1"/>
+				<field showon="cg_type:dir,files" name="mobilezoom" type="radio" label="CG_MOBILEZOOM" description="CG_ZOOM_DESC" 
+					class="btn-group" default="0">
+                    <option value="0">JNO</option>
+					<option value="1">CG_ZOOM_1</option>
+					<option value="2">CG_ZOOM_2</option>
+                </field>
+				<field showon="mobilezoom:1,2" name="mobilemagnify" type="number" label="CG_MOBILEZOOM_MAGNIFY" description="CG_MOBILEZOOM_MAGNIFY_DESC" 
+					default="1.5" min="0.5" max="3" step="0.1"/>
 				<field showon="cg_type:dir,files" name="optimize" type="radio" label="CG_OPTIMIZE" description="CG_OPTIMIZE_DESC" 
 					class="btn-group" default="0">
                     <option value="0">JNO</option>
@@ -221,6 +229,14 @@
 				</field>
 				
 			</fieldset>
+			<fieldset name="advanced">
+				<field name="cache"	type="list"	label="COM_MODULES_FIELD_CACHING_LABEL"
+					default="0"	filter="integer" validate="options"	>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+			</fieldset>
+			
 		</fields>
 		
 	</config>

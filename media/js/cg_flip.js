@@ -1,6 +1,6 @@
 /**
  * @package CG Flip Module
- * @version 2.4.6
+ * @version 2.4.7
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -25,7 +25,7 @@ function go_flip($,myid,options,ajax) {
 	var divWidth = $(me + ' #magazine-viewport').outerWidth(true);
 	var isPhone = (options.device == 'phone');
 	var turnHeight = (divWidth * ratio) / 2;
-	if (isPhone) options.zoom = "0"; // phone : disable zoom
+	if (isPhone && (options.zoom == "3")) options.zoom = "0"; // phone : disable scroll zoom
 	if ((options.type == "dir") || (options.type == "files")) { //images
 		var $pagesArray = options.files;
 	} else { // articles or events
@@ -104,8 +104,15 @@ function go_flip($,myid,options,ajax) {
 			},
 			missing: function (event, pages) {
 				if ((options.type == "dir") || (options.type == "files")) { 
-					for (var i = 0; i < pages.length; i++)
-						addPage(pages[i], $(this), options.base,$pagesArray[pages[i] - 1],options.zoom,options.magnify);
+					for (var i = 0; i < pages.length; i++) {
+						let zoom = options.zoom;
+						let magnify = options.magnify;
+						if (isPhone) {
+							zoom = options.mobilezoom;
+							magnify = options.mobilemagnify;
+						}
+						addPage(pages[i], $(this), options.base,$pagesArray[pages[i] - 1],zoom,magnify);
+					}
 				} else {
 					for (var i = 0; i < $pagesArray.length; i++)
 						$(this).turn("addPage", $pagesArray[i],i + 1);

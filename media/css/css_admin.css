@@ -1,8 +1,8 @@
 /**
  * @package CG Flip Module
- * @version 2.2.1
- * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
- * @copyright (c) 2023 ConseilGouz. All Rights Reserved.
+ * @version 2.4.7
+ * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
+ * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
  * 
  *						>>>	CSS for Admin display module  <<<
@@ -25,14 +25,25 @@
 .control-group:nth-of-type(11){ /* CSS */
 	float:none;clear:both
 }
-
-.control-group:nth-of-type(21){
+.control-group:nth-of-type(19){ /* zoom */
 	float:left;width:50%;
 }
-.control-group:nth-of-type(22){
+.control-group:nth-of-type(20){ /* magnify */
+	float:right;width:50%;
+}
+.control-group:nth-of-type(21){ /* mobile zoom */
+	clear:both;float:left;width:50%;
+}
+.control-group:nth-of-type(22){ /* mobile magnify */
+	float:right;width:50%;
+}
+.control-group:nth-of-type(23){ /* optimize images */
+	clear:both;float:left;width:50%;
+}
+.control-group:nth-of-type(24){ /* optimize factor */
 	float:left;width:50%;
 }
-.control-group:nth-of-type(23){
+.control-group:nth-of-type(25){ /* recreate images */
 	clear:both;
 }
 .controls textarea {width:70%}

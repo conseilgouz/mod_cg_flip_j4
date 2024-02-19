@@ -1,7 +1,7 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.4.6 
+ * @version 2.4.7 
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -23,9 +23,13 @@ $wa = Factory::getDocument()->getWebAssetManager();
 $wa->registerAndUseStyle('cgflip',$modulefield.'/css/cgflip.min.css'); 
 $wa->registerAndUseStyle('up',$modulefield.'/css/up.css'); 
 $wa->registerAndUseScript('turn',$modulefield.'/js/turn.min.js');
-if (( $params->get('zoom','0') == "1") || ( $params->get('zoom','0') == "2")) // zoom
-	$wa->registerAndUseScript('zoom',$modulefield.'/js/jquery.zoom.js');
-if ( $params->get('zoom','0') == "3") // wheelzoom
+
+$device = CGFlipHelper::detectDevice();
+if ( (($device == "computer") && ( ( $params->get('zoom','0') == "1") || ( $params->get('zoom','0') == "2")) ) ||
+	 (($device == "phone") && (( $params->get('mobilezoom','0') == "1") || ( $params->get('mobilezoom','0') == "2"))) ) // zoom
+		$wa->registerAndUseScript('zoom',$modulefield.'/js/jquery.zoom.js');
+if ( (($device == "computer") && ($params->get('zoom','0') == "3")) || 
+	  (($device == "phone") && ($params->get('mobilezoom','0') == "3")) ) // wheelzoom
 	$wa->registerAndUseScript('wheel',$modulefield.'/js/wheelzoom.js');
 $wa->registerAndUseScript('loaded',$modulefield.'/js/imagesloaded.min.js');
 $wa->registerAndUseScript('magazine',$modulefield.'/js/magazine.js');
@@ -110,7 +114,10 @@ $document->addScriptOptions('cg_flip_'.$module->id,
 	array('id' => $module->id,'base' => URI::base(true),'type' => $type,'ratio' => $ratio
 		,'speffect' => $params->get('sp-effect','fadeIn'),'nbpages' => $nbpages,'onepage' => Text::_('CG_UNE_PAGE')
 		,'twopages' => Text::_('CG_DEUX_PAGE'),'init' => $params->get('init','double'),'init_phone' => $params->get('init_phone','single')
-		,'files' => $files,'auto' => $params->get('auto', 'false'),'auto_delay' => $params->get('auto_delay', '3000'),'clickpage'=>$params->get('clickpage','false'),'zoom' => $params->get('zoom','0'),'magnify'=>$params->get('magnify','1'),'device' => CGFlipHelper::detectDevice())
+		,'files' => $files,'auto' => $params->get('auto', 'false'),'auto_delay' => $params->get('auto_delay', '3000'),
+		'clickpage'=>$params->get('clickpage','false'),'zoom' => $params->get('zoom','0'),'magnify'=>$params->get('magnify','1')
+		,'mobilezoom' => $params->get('mobilezoom','0'),'mobilemagnify'=>$params->get('mobilemagnify','1')
+		,'device' => CGFlipHelper::detectDevice())
 	);
 
 

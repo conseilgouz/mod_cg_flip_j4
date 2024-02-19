@@ -2,6 +2,21 @@
 	<changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
+		<version>2.4.7</version>
+        <note>
+            <item>Update : 19/02/2024</item>
+        </note>
+        <fix>
+            <item>Disable wheel zoom only on mobile</item>
+		</fix>
+        <addition>
+            <item>New parameter : select caching or not</item>
+            <item>Add mobile zooming parameter</item>
+		</addition>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
 		<version>2.4.6</version>
         <note>
             <item>Update : 11/02/2024</item>
