@@ -1,6 +1,6 @@
 /**
  * @package CG Flip Module
- * @version 2.4.5
+ * @version 2.4.8
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -40,20 +40,26 @@ function loadPage(page, pageElement,dir,file,zoom,magnify) {
 			if (jQuery(this).data('zoom') == "2") on = 'click';
 			jQuery(this).parent().zoom({url: url,magnify: jQuery(this).data('magnify'), on:on });
 		}
-		if (jQuery(this).data('zoom') == "3") { // wheelzoom
+		if (jQuery(this).data('zoom') == "3") { // wheelzoom 
 		    if (jQuery(this).hasClass('todo')) {
 				wheelzoom(this);  
 				jQuery(this).removeClass('todo')
 			}
 		}
+		if (jQuery(this).data('zoom') == "4") { // pinch 
+		    if (jQuery(this).hasClass('todo')) {
+				new Zoom(this,{rotate:false});
+				jQuery(this).removeClass('todo')
+			}
+		}
 	});
-	if ((zoom == '3') && (file.indexOf('/th/') > 0)){ // wheelzoom
+	if (((zoom == '3') || (zoom == '4')) && (file.indexOf('/th/') > 0)){ // wheelzoom
 		file = file.replace('/th/','/');
 	}
 	img.attr('src', dir + '/' + file);
 	img.data('zoom',zoom);
 	img.data('magnify',magnify);
-	if (zoom == "3") // wheelzoom
+	if ((zoom == "3") || (zoom == "4")) // wheelzoom or pinch 
 		img.addClass('zoom todo'); 
 }
 // http://code.google.com/p/chromium/issues/detail?id=128488

@@ -2,12 +2,12 @@
 <extension version="4.0" type="module" method="upgrade" client="site">
 	<name>CG Flip</name>
 	<author>ConseilGouz</author>
-	<creationDate>2024-02-19</creationDate>
+	<creationDate>2024-02-21</creationDate>
 	<copyright>Copyright (C) 2024 ConseilGouz. All rights reserved</copyright>
 	<license>https://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv2</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>2.4.7</version>
+	<version>2.4.8</version>
 	<description>CG_XML_DESCRIPTION</description>
 	<namespace path="src">ConseilGouz\Module\CGFlip</namespace>
 	<scriptfile>script.php</scriptfile>
@@ -128,6 +128,7 @@
                     <option value="0">JNO</option>
 					<option value="1">CG_ZOOM_1</option>
 					<option value="2">CG_ZOOM_2</option>
+					<option value="4">CG_ZOOM_4</option>
                 </field>
 				<field showon="mobilezoom:1,2" name="mobilemagnify" type="number" label="CG_MOBILEZOOM_MAGNIFY" description="CG_MOBILEZOOM_MAGNIFY_DESC" 
 					default="1.5" min="0.5" max="3" step="0.1"/>
