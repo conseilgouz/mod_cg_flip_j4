@@ -48,7 +48,7 @@ function loadPage(page, pageElement,dir,file,zoom,magnify) {
 		}
 		if (jQuery(this).data('zoom') == "4") { // pinch 
 		    if (jQuery(this).hasClass('todo')) {
-				new Zoom(this,{rotate:false,minZoom:1,maxZoom:2});
+				new Zoom(this,{rotate:false,minZoom:1,maxZoom:jQuery(this).data('magnify')});
 				jQuery(this).removeClass('todo')
 			}
 		}

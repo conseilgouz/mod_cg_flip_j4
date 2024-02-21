@@ -130,7 +130,7 @@
 					<option value="2">CG_ZOOM_2</option>
 					<option value="4">CG_ZOOM_4</option>
                 </field>
-				<field showon="mobilezoom:1,2" name="mobilemagnify" type="number" label="CG_MOBILEZOOM_MAGNIFY" description="CG_MOBILEZOOM_MAGNIFY_DESC" 
+				<field showon="mobilezoom:1,2,4" name="mobilemagnify" type="number" label="CG_MOBILEZOOM_MAGNIFY" description="CG_MOBILEZOOM_MAGNIFY_DESC" 
 					default="1.5" min="0.5" max="3" step="0.1"/>
 				<field showon="cg_type:dir,files" name="optimize" type="radio" label="CG_OPTIMIZE" description="CG_OPTIMIZE_DESC" 
 					class="btn-group" default="0">
