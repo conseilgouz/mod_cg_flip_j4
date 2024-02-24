@@ -1,7 +1,7 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.4.8
+ * @version 2.4.9
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -29,11 +29,11 @@ if ( (($device == "computer") && ( ( $params->get('zoom','0') == "1") || ( $para
 	 (($device == "phone") && (( $params->get('mobilezoom','0') == "1") || ( $params->get('mobilezoom','0') == "2"))) ) // zoom
 		$wa->registerAndUseScript('zoom',$modulefield.'/js/jquery.zoom.js');
 if  (($device == "computer") && ($params->get('zoom','0') == "3")) // wheel zoom
-	$wa->registerAndUseScript('wheel',$modulefield.'/js/wheelzoom.js');
+	$wa->registerAndUseScript('wheel',$modulefield.'/js/wheelzoom.min.js');
 if 	(($device == "phone") && ($params->get('mobilezoom','0') == "4")) // pinch zoom
-	$wa->registerAndUseScript('pinch',$modulefield.'/js/pinchzoom.js');
+	$wa->registerAndUseScript('pinch',$modulefield.'/js/pinchzoom.min.js');
 $wa->registerAndUseScript('loaded',$modulefield.'/js/imagesloaded.min.js');
-$wa->registerAndUseScript('magazine',$modulefield.'/js/magazine.js');
+$wa->registerAndUseScript('magazine',$modulefield.'/js/magazine.min.js');
 if ((bool)Factory::getConfig()->get('debug')) { // Mode debug
 	$document->addScript(''.URI::base(true).'/media/mod_cg_flip/js/cg_flip.js'); 
 } else { 

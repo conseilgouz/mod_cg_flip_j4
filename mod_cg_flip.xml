@@ -2,12 +2,12 @@
 <extension version="4.0" type="module" method="upgrade" client="site">
 	<name>CG Flip</name>
 	<author>ConseilGouz</author>
-	<creationDate>2024-02-21</creationDate>
+	<creationDate>2024-02-24</creationDate>
 	<copyright>Copyright (C) 2024 ConseilGouz. All rights reserved</copyright>
 	<license>https://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv2</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>2.4.8</version>
+	<version>2.4.9</version>
 	<description>CG_XML_DESCRIPTION</description>
 	<namespace path="src">ConseilGouz\Module\CGFlip</namespace>
 	<scriptfile>script.php</scriptfile>

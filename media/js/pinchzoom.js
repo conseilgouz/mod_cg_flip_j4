@@ -1,3 +1,11 @@
+/***
+ * @package CG Flip Module
+ * @version 2.4.9
+ * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
+ * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
+ * @author ConseilGouz 
+ * pinch zoom from https://github.com/anitasv/zoom
+ **/
 // Type Vector is [ x, y ]
 // Type Matrix is [ Vector, Vector ]
 // Type Transform is [ Matrix, Vector ]
@@ -386,6 +394,7 @@ function Zoom(elem, config, wnd) {
 
     this._handleZoom = handleTouchEvent(function(touches) {
         var numOfFingers = touches.length;
+		if ((numOfFingers == 1) && (me.activeZoom == identity)) return; // pascal : not zooming : ignore 1 finger moves
         if (numOfFingers !== me.curTouch){
             me.curTouch = numOfFingers;
             me.finalize();

@@ -1,5 +1,11 @@
-/*!
-	Wheelzoom 4.0.2 : updated Pascal : wrong img width/height if 100% in CSS
+/*
+ * @package CG Flip Module
+ * @version 2.4.9
+ * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
+ * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
+ * @author ConseilGouz 
+
+	from Wheelzoom 4.0.2 : updated Pascal : wrong img width/height if 100% in CSS
 	license: MIT
 	http://www.jacklmoore.com/wheelzoom
 */

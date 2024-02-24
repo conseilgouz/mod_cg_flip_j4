@@ -2,6 +2,21 @@
 	<changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
+		<version>2.4.9</version>
+        <note>
+            <item>Update : 24/02/2024</item>
+        </note>
+        <fix>
+            <item>pinch zoom : don't move image if not zooming</item>
+            <item>update pinchzoom and wheelzoom copyrights </item>
+		</fix>
+		<change>
+			<item>load min version of js files</item>
+		</change>
+	</changelog>
+	<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
 		<version>2.4.8</version>
         <note>
             <item>Update : 21/02/2024</item>
