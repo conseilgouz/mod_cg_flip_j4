@@ -1,4 +1,15 @@
 <changelogs>
+		<changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
+		<version>2.4.10</version>
+        <note>
+            <item>Update : 26/02/2024</item>
+        </note>
+        <fix>
+            <item>pinch zoom : add viewport position to zoom position</item>
+		</fix>
+	</changelog>
 	<changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>

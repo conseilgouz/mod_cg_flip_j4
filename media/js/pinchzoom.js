@@ -1,6 +1,6 @@
 /***
  * @package CG Flip Module
- * @version 2.4.9
+ * @version 2.4.10
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz 
@@ -345,8 +345,8 @@ function Zoom(elem, config, wnd) {
 
     var getCoordsDouble = function(t) {
         var rect = elem.parentNode.getBoundingClientRect();
-        var oX = rect.left;
-        var oY = rect.top;
+        var oX = window.scrollX + rect.left; // pascal : add viewport position
+        var oY = window.scrollY +rect.top; // pascal : add viewport position
         return [
             [t[0].pageX - oX, t[0].pageY - oY],
             [t[1].pageX - oX, t[1].pageY - oY]
