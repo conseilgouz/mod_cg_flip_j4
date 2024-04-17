@@ -1,5 +1,16 @@
 <changelogs>
-		<changelog>
+    <changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
+		<version>2.4.11</version>
+        <note>
+            <item>Update : 17/04/2024</item>
+        </note>
+        <fix>
+            <item>Disable optimize if using cgwebp plugin</item>
+		</fix>
+	</changelog>
+    <changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
 		<version>2.4.10</version>
