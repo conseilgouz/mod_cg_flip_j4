@@ -7,8 +7,7 @@
 		<field name="collapse" type="sql"
 		default="0"
 		query="select enabled from #__extensions where name = 'plg_system_phocacollapse'"
-		key_field="enabled"
-		key_value="enabled"
+		key_field="enabled" value_field="enabled"
 		class="hidden"
 		/>
 		<field name="sf_type" type="radio"  label="CG_TYPE" default="content" >

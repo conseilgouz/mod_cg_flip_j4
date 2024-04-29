@@ -2,6 +2,17 @@
     <changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
+		<version>2.4.12</version>
+        <note>
+            <item>Update : 29/04/2024</item>
+        </note>
+        <fix>
+            <item>Article selection : Suppress warning undefined property stdClss::$collapse</item>
+		</fix>
+	</changelog>
+    <changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
 		<version>2.4.11</version>
         <note>
             <item>Update : 17/04/2024</item>
