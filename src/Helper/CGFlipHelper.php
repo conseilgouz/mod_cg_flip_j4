@@ -1,8 +1,8 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.4.11
- * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+ * @version 2.4.13
+ * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz
  */
@@ -10,18 +10,19 @@
 namespace ConseilGouz\Module\CGFlip\Site\Helper;
 
 defined('_JEXEC') or die;
-use Joomla\CMS\Factory;
 use Joomla\CMS\Access\Access;
-use Joomla\CMS\Router\Route;
-use Joomla\CMS\Language\Text;
-use Joomla\CMS\Uri\Uri;
-use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Environment\Browser;
+use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
 use Joomla\Component\Content\Site\Model\ArticlesModel;
 use Joomla\Component\Content\Site\Model\ArticleModel;
 use Joomla\Component\Content\Site\Helper\RouteHelper;
-use Joomla\CMS\Environment\Browser;
+use Joomla\Database\DatabaseInterface;
 
 class CGFlipHelper
 {
@@ -357,18 +358,18 @@ class CGFlipHelper
     }
     public static function getJEvent($params, $cat, $limit)
     {
-        $db = Factory::getDbo();
+        $db = Factory::getContainer()->get(DatabaseInterface::class);
         $db->setQuery("SELECT enabled FROM #__extensions WHERE element = 'com_jevents'");
         $is_enabled = $db->loadResult();
         if ($is_enabled != 1) {
             $res[] = '<div class="cg_flip_article"><div class="cg_page_event" style="background-color:'.$params->get('event_bg', 'lightblue').'"><div class="cg_un_event">'.Text::_('CG_INSTALL_JEVENTS').'</div></div></div>';
             return $res;
         }
-        $lang = Factory::getLanguage();
+        $lang = Factory::getApplication()->getLanguage();
         $locale = $lang->getLocale();
         setlocale(LC_TIME, $locale[0], $locale[5]);
         $res = array();
-        $db = Factory::getDbo();
+
         $query = $db->getQuery(true);
         $query->select("GROUP_CONCAT(vrepet.rp_id) as id,GROUP_CONCAT(vrepet.startrepeat) as dtstart, GROUP_CONCAT(vrepet.endrepeat) as dtend,detail.description, detail.summary")
         ->from("#__jevents_vevdetail detail ")
@@ -405,12 +406,15 @@ class CGFlipHelper
             }
             $rac .=	$id;
             if ((strlen($unevt['description']) == 0) || ($params->get('typeaff', 'title') == "title")) {
+                $fmt = new \IntlDateFormatter($lang->getTag(), null, null);
+                $fmt->setPattern('EEEE d/MM');
                 if ($multi) {
                     $desc =  htmlentities($unevt['summary'], ENT_NOQUOTES, 'utf-8').'<br/>';
-                    $desc .= Text::_('CG_FROM').' '.date('%A', strtotime($dtstart)).' '.date(Text::_('CG_DATEFORMAT_EVENTS'), strtotime($dtstart));
-                    $desc .= ' '.Text::_('CG_TO').' '.date('%A', strtotime($dtend)).' '.date(Text::_('CG_DATEFORMAT_EVENTS'), strtotime($dtend));
+
+                    $desc .= Text::_('CG_FROM').' '.$fmt->format(new \DateTime($dtstart));
+                    $desc .= ' '.Text::_('CG_TO').' '.$fmt->format(new \DateTime($dtend));
                 } else {
-                    $desc = htmlentities($unevt['summary'], ENT_NOQUOTES, 'utf-8').'<br/>'.date('%A', strtotime($dtstart)).' '.date(Text::_('CG_DATEFORMAT_EVENTS'), strtotime($dtstart));
+                    $desc = htmlentities($unevt['summary'], ENT_NOQUOTES, 'utf-8').'<br/>'.$fmt->format(new \DateTime($dtstart));
                     if (!(date('H\hi', strtotime($dtstart)) == '00h00')) {
                         $desc .= ' '.Text::_('CG_START').' '.date('H\hi', strtotime($dtstart));
                     }
@@ -439,7 +443,8 @@ class CGFlipHelper
     }
     public static function getDPCalendar($params, $cat, $limit)
     {
-        $db = Factory::getDbo();
+        $db = Factory::getContainer()->get(DatabaseInterface::class);
+
         $db->setQuery("SELECT enabled FROM #__extensions WHERE name = 'DPCalendar'");
         $is_enabled = $db->loadResult();
         if ($is_enabled != 1) {
@@ -450,7 +455,7 @@ class CGFlipHelper
         $locale = $lang->getLocale();
         setlocale(LC_TIME, $locale[0], $locale[5]);
         $res = array();
-        $db = Factory::getDbo();
+
         $query = $db->getQuery(true);
         $query->select("detail.id,detail.start_date, detail.end_date,detail.title, detail.description, detail.all_day")
         ->from("#__dpcalendar_events detail ")
@@ -464,11 +469,15 @@ class CGFlipHelper
             $res[] = '<div class="cg_flip_article"><div class="cg_page_event" style="background-color:'.$params->get('event_bg', 'lightblue').'"><div class="cg_un_event">'.Text::_('CG_NO_EVENT').'</div></div></div>';
             return $res;
         }
+
+        $fmt = new \IntlDateFormatter($lang->getTag(), null, null);
+        $fmt->setPattern('EEEE d/MM');
+
         foreach($resdb as $unevt) {
             $rac = 'index.php/'.$params->get('menupathdp').'/'.$unevt['id'];
             if ((strlen($unevt['description']) == 0) || ($params->get('typeaff') == "title")) {
                 // pas de description: on en génère une à partir du titre
-                $desc = htmlentities($unevt['title'], ENT_NOQUOTES, 'utf-8').'<br/>'.date('%A', strtotime($unevt['start_date'])).' '.date('d/m', strtotime($unevt['start_date']));
+                $desc = htmlentities($unevt['title'], ENT_NOQUOTES, 'utf-8').'<br/>'.$fmt->format(new \DateTime($unevt['start_date']));
                 if ($unevt['all_day'] == '0') {
                     $desc .= ' '.Text::_('CG_START').' '.date('H\hi', strtotime($unevt['start_date']));
                 }
