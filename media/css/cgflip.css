@@ -243,6 +243,7 @@ body.hide-overflow {
     background-repeat: no-repeat;
     height: 25px;
     width: 25px;
+    display:inline-block;
 }
 .previous-button {
     background-image: url(../images/arrows.png);
@@ -250,6 +251,7 @@ body.hide-overflow {
     background-repeat: no-repeat;
     height: 25px;
     width: 25px;
+    display:inline-block;
 }
 [class*=" ison-"]:before, [class^=ison-]:before {
     font-family: cgflip!important;

@@ -2,6 +2,18 @@
     <changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
+		<version>2.5.0</version>
+        <note>
+            <item>Update : 01/07/2024</item>
+        </note>
+        <change>
+            <item>Becomes a service provider</item>
+            <item>JEvents : select multiple categories</item>
+		</change>
+	</changelog>
+    <changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
 		<version>2.4.13</version>
         <note>
             <item>Update : 19/05/2024</item>

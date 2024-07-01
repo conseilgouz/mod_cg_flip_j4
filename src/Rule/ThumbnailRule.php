@@ -1,9 +1,8 @@
 <?php
 /**
 * CG Flip - Joomla Module
-* Version			: 2.4.11
 * copyright 		: Copyright (C) 2024 ConseilGouz. All rights reserved.
-* license    		: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+* license    		: https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
 */
 
 namespace ConseilGouz\Module\CGFlip\Site\Rule;

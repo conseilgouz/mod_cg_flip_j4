@@ -1,7 +1,6 @@
 <?php
 /**
  * @package CG Flip Module
- * @version 2.4.13
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz
@@ -376,8 +375,16 @@ class CGFlipHelper
         ->innerJoin("#__jevents_repetition vrepet ON detail.evdet_id = vrepet.eventdetail_id ")
         ->innerJoin("#__jevents_vevent vevent ON vevent.ev_id = vrepet.eventid ")
         ->innerJoin("#__categories cat ON vevent.catid = cat.id")
-        ->where("cat.extension = 'com_jevents' AND cat.id = '".$cat."' AND vevent.state > 0 AND vrepet.startrepeat > now() AND vrepet.endrepeat > now() AND detail.state = 1")
-        ->order("detail.dtstart ASC")
+        ->where("cat.extension = 'com_jevents'")
+        ->where("vevent.state > 0")
+        ->where("vrepet.startrepeat > now() AND vrepet.endrepeat > now()")
+        ->where("vevent.state > 0 AND  detail.state = 1");
+        if (is_array($cat)) {// multiple categories
+            $query->whereIN("cat.id", $cat);
+        } else { // one category (compatibility with older versions)
+            $query->where("cat.id = '".$cat."'");
+        }
+        $query->order("detail.dtstart ASC")
         ->group("vevent.ev_id")
         ->setLimit($limit);
         $db->setQuery($query);
