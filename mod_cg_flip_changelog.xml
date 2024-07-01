@@ -2,6 +2,17 @@
     <changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
+		<version>2.5.1</version>
+        <note>
+            <item>Update : 01/07/2024</item>
+        </note>
+        <fix>
+            <item>Call to undefined method Joomla\Filesystem\File::exists()</item>
+		</fix>
+	</changelog>
+    <changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
 		<version>2.5.0</version>
         <note>
             <item>Update : 01/07/2024</item>

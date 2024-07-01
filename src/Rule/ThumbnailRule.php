@@ -53,7 +53,7 @@ class ThumbnailRule extends FormRule
                 $pos = strrpos($imgthumb, '/');
                 $len = strlen($imgthumb);
                 $imgthumb = $_dir.'/th/'.substr($imgthumb, $pos, $len);
-                if (!File::exists('../'.$imgthumb)) { // fichier existe déjà  : on sort
+                if (!file_exists('../'.$imgthumb)) { // fichier existe déjà  : on sort
                     self::createThumbNail(URI::root().$_dir.'/'.$file, JPATH_ROOT.'/'.$imgthumb, $compression);
                     $nb = $nb + 1;
                 }
@@ -76,7 +76,7 @@ class ThumbnailRule extends FormRule
             $len = strlen($imgthumb);
             $nb = 0;
             $imgthumb = substr($imgthumb, 0, $pos + 1).'th/'.substr($imgthumb, $pos + 1, $len);
-            if (!File::exists('../'.$imgthumb)) { // fichier existe déjà  : on sort
+            if (!file_exists('../'.$imgthumb)) { // fichier existe déjà  : on sort
                 self::createThumbNail(URI::root().$imgname, JPATH_ROOT.'/'.$imgthumb, $compression);
                 $nb = $nb + 1;
             }
