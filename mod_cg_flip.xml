@@ -2,12 +2,12 @@
 <extension version="4.0" type="module" method="upgrade" client="site">
 	<name>CG Flip</name>
 	<author>ConseilGouz</author>
-	<creationDate>2024-07-01</creationDate>
-	<copyright>Copyright (C) 2024 ConseilGouz. All rights reserved</copyright>
+	<creationDate>2025-04-13</creationDate>
+	<copyright>Copyright (C) 2025 ConseilGouz. All rights reserved</copyright>
 	<license>https://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv2</license>
 	<authorEmail>pascal.leconte@conseilgouz.com</authorEmail>
 	<authorUrl>www.conseilgouz.com</authorUrl>
-	<version>2.5.1</version>
+	<version>2.5.2</version>
 	<description>CG_XML_DESCRIPTION</description>
 	<namespace path="src">ConseilGouz\Module\CGFlip</namespace>
 	<scriptfile>script.php</scriptfile>
@@ -39,7 +39,7 @@
 			<fieldset name="basic"
 				addruleprefix="ConseilGouz\Module\CGFlip\Site\Rule"
 				addfieldprefix="ConseilGouz\Module\CGFlip\Site\Field">
-				<field name="version" type="version"  margintop="-4em" extension="mod_cg_flip"/>				
+				<field name="version" type="version"  margintop="-3em" extension="mod_cg_flip"/>				
 				<field name="ratiotype" type="radio" label="CG_RATIO_TYPE" description="CG_RATIO_TYPE_DESC" 
 					class="btn-group" default="0">
                     <option value="0">CG_STANDARD</option>
@@ -121,7 +121,7 @@
 					<option value="2">CG_ZOOM_2</option>
 					<option value="3">CG_ZOOM_3</option>
                 </field>
-				<field showon="zoom:1,2" name="magnify" type="number" label="CG_ZOOM_MAGNIFY" description="CG_ZOOM_MAGNIFY_DESC" 
+				<field showon="cg_type:dir,files[AND]zoom:1,2" name="magnify" type="number" label="CG_ZOOM_MAGNIFY" description="CG_ZOOM_MAGNIFY_DESC" 
 					default="1.5" min="0.5" max="3" step="0.1"/>
 				<field showon="cg_type:dir,files" name="mobilezoom" type="radio" label="CG_MOBILEZOOM" description="CG_ZOOM_DESC" 
 					class="btn-group" default="0">
@@ -130,7 +130,7 @@
 					<option value="2">CG_ZOOM_2</option>
 					<option value="4">CG_ZOOM_4</option>
                 </field>
-				<field showon="mobilezoom:1,2,4" name="mobilemagnify" type="number" label="CG_MOBILEZOOM_MAGNIFY" description="CG_MOBILEZOOM_MAGNIFY_DESC" 
+				<field showon="cg_type:dir,files[AND]mobilezoom:1,2,4" name="mobilemagnify" type="number" label="CG_MOBILEZOOM_MAGNIFY" description="CG_MOBILEZOOM_MAGNIFY_DESC" 
 					default="1.5" min="0.5" max="3" step="0.1"/>
 				<field showon="cg_type:dir,files" name="optimize" type="radio" label="CG_OPTIMIZE" description="CG_OPTIMIZE_DESC" 
 					class="btn-group" default="0">

@@ -10,20 +10,38 @@
 .form-horizontal .controls {
 	margin-left: 10px;
 }
-.control-group:nth-of-type(7){
-	float:left;width:50%;
+.control-group:nth-of-type(4){  /* page type */
+	width:50%;float:left
 }
-.control-group:nth-of-type(8){ /* display */
+.control-group:nth-of-type(5){  /* page format */
+	width:50%;float:right
+}
+.control-group:nth-of-type(6){  /* ratio */
+	width:50%;float:right
+}
+.control-group:nth-of-type(7){  /* display */
+	clear:both;float:left;width:50%;
+}
+.control-group:nth-of-type(8){ /* phone display */
 	float:right;width:50%;
 }
-.control-group:nth-of-type(9){ /* phone display */
+.control-group:nth-of-type(9){ /* menu type */
 	float:left;width:50%;
 }
-.control-group:nth-of-type(10){ /* CSS */
+.control-group:nth-of-type(10){ /* menu position */
 	float:right;width:50%
 }
 .control-group:nth-of-type(11){ /* CSS */
 	float:none;clear:both
+}
+.control-group:nth-of-type(13){ /* delay */
+	float:left;width:50%;
+}
+.control-group:nth-of-type(14){ /* menu position */
+	float:right;width:50%
+}
+.control-group:nth-of-type(15){ /* info to display */
+	clear:both;
 }
 .control-group:nth-of-type(19){ /* zoom */
 	float:left;width:50%;
@@ -46,6 +64,9 @@
 .control-group:nth-of-type(25){ /* recreate images */
 	clear:both;
 }
+.control-group:nth-of-type(26){ /* recreate images */
+	clear:both;
+}
 .controls textarea {width:70%}
 
 .info-labels + div {
@@ -54,8 +75,8 @@ color: #000000;
 font-size: 110%;
 font-style: italic;
 font-weight: normal;
-margin: 15px 0 30px;
-padding: 15px 10px 10px 20px;
+margin: 15px 0 10px;
+padding: 15px 10px 10px 10px;
 }
 .subform-repeatable-group .control-group:nth-of-type(3){
 	display:none;

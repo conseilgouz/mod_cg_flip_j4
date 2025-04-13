@@ -2,7 +2,7 @@
 /**
  * @package CG Flip Module
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
- * @copyright (c) 2024 ConseilGouz. All Rights Reserved.
+ * @copyright (c) 2025 ConseilGouz. All Rights Reserved.
  * @author ConseilGouz
  */
 
@@ -413,7 +413,7 @@ class CGFlipHelper
             }
             $rac .=	$id;
             if ((strlen($unevt['description']) == 0) || ($params->get('typeaff', 'title') == "title")) {
-                $fmt = new \IntlDateFormatter($lang->getTag(), null, null);
+                $fmt = new \IntlDateFormatter($lang->getTag());
                 $fmt->setPattern('EEEE d/MM');
                 if ($multi) {
                     $desc =  htmlentities($unevt['summary'], ENT_NOQUOTES, 'utf-8').'<br/>';
@@ -477,7 +477,7 @@ class CGFlipHelper
             return $res;
         }
 
-        $fmt = new \IntlDateFormatter($lang->getTag(), null, null);
+        $fmt = new \IntlDateFormatter($lang->getTag());
         $fmt->setPattern('EEEE d/MM');
 
         foreach($resdb as $unevt) {

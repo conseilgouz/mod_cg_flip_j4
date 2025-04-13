@@ -2,6 +2,18 @@
     <changelog>
 		<element>mod_cg_flip</element>
 		<type>Module</type>
+		<version>2.5.2</version>
+        <note>
+            <item>Update : 13/04/2025</item>
+        </note>
+        <fix>
+            <item>Suppress IntlDateFormatter notice</item>
+            <item>Params : hide zoom on events</item>
+		</fix>
+	</changelog>
+    <changelog>
+		<element>mod_cg_flip</element>
+		<type>Module</type>
 		<version>2.5.1</version>
         <note>
             <item>Update : 01/07/2024</item>

@@ -2,27 +2,28 @@
 /**
 * CG Flip Module  - Joomla 4.x/5.x Module 
 * Package			: CG Flip
-* copyright 		: Copyright (C) 2024 ConseilGouz. All rights reserved.
+* copyright 		: Copyright (C) 2025 ConseilGouz. All rights reserved.
 * license    		: https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
 */
 // No direct access to this file
 defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
-use Joomla\Filesystem\Folder;
 use Joomla\CMS\Version;
+use Joomla\Database\DatabaseInterface;
 use Joomla\Filesystem\File;
+use Joomla\Filesystem\Folder;
 
 class mod_cg_flipInstallerScript
 {
-	private $min_joomla_version      = '4.0.0';
-	private $min_php_version         = '7.4';
-	private $name                    = 'CG Flip';
-	private $exttype                 = 'module';
-	private $extname                 = 'cg_flip';
-	private $previous_version        = '';
-	private $dir           = null;
-	private $lang;
+	private $min_joomla_version     = '4.0.0';
+	private $min_php_version        = '7.4';
+	private $name                   = 'CG Flip';
+	private $exttype                = 'module';
+	private $extname                = 'cg_flip';
+	private $previous_version       = '';
+	private $dir                    = null;
+	private $lang                   = null;
 	
 	private $installerName = 'cg_flipinstaller';
 	public function __construct()
@@ -153,7 +154,7 @@ class mod_cg_flipInstallerScript
 			JPATH_PLUGINS . '/system/' . $this->installerName . '/language',
 			JPATH_PLUGINS . '/system/' . $this->installerName,
 		]);
-		$db = Factory::getDbo();
+		$db = Factory::getContainer()->get(DatabaseInterface::class);
 		$query = $db->getQuery(true)
 			->delete('#__extensions')
 			->where($db->quoteName('element') . ' = ' . $db->quote($this->installerName))
