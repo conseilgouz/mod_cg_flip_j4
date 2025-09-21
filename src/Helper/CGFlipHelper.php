@@ -153,7 +153,7 @@ class CGFlipHelper
 
             // Access filter
             $access = ComponentHelper::getParams('com_content')->get('show_noauth');
-            $authorised = Access::getAuthorisedViewLevels(Factory::getUser()->get('id'));
+            $authorised = Access::getAuthorisedViewLevels(Factory::getApplication()->getIdentity()->id);
             $model->setState('filter.access', $access);
 
             // Category filter
@@ -214,7 +214,7 @@ class CGFlipHelper
             $articles->setState('filter.published', 1);
             // Access filter
             $access     = ComponentHelper::getParams('com_content')->get('show_noauth');
-            $authorised = Access::getAuthorisedViewLevels(Factory::getUser()->get('id'));
+            $authorised = Access::getAuthorisedViewLevels(Factory::getApplication()->getIdentity()->id);
             $articles->setState('filter.access', $access);
             $catids = $id;
             $articles->setState('filter.category_id', $catids);
